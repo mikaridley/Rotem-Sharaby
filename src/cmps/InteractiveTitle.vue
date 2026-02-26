@@ -163,6 +163,25 @@ onUnmounted(() => {
     width: 100%;
     max-width: 40rem;
     position: relative;
+    --mask-size: 20%;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black calc(var(--mask-size) * 0.5),
+      black calc(100% - var(--mask-size) * 0.5),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black calc(var(--mask-size) * 0.5),
+      black calc(100% - var(--mask-size) * 0.5),
+      transparent 100%
+    );
+    mask-size: 100% 100%;
+    mask-position: 0 0;
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-position: 0 0;
 
     &.no-transition .interactive-title-strip {
       transition: none;
