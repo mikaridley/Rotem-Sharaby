@@ -17,6 +17,12 @@
           playsinline
           class="video-thumbnail"
         />
+        <span class="video-play-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.9)" stroke-width="2"/>
+            <path d="M26 20v24l20-12z" fill="#fff"/>
+          </svg>
+        </span>
       </button>
     </div>
 
@@ -122,6 +128,7 @@ if (typeof document !== 'undefined') {
     max-width: 128rem;
 
     .video-box {
+      position: relative;
       aspect-ratio: 16 / 9;
       padding: 0;
       border: none;
@@ -141,6 +148,27 @@ if (typeof document !== 'undefined') {
         object-fit: cover;
         display: block;
 
+      }
+
+      .video-play-icon {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        pointer-events: none;
+
+        svg {
+          width: 5rem;
+          height: 5rem;
+          filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.6));
+          transition: transform 0.25s ease;
+        }
+      }
+
+      &:hover .video-play-icon svg {
+        transform: scale(1.08);
       }
     }
 
