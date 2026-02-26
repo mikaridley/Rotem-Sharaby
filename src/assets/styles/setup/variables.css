@@ -1,11 +1,15 @@
 :root {
   --prime-bg: #1A132A;
   --sec-bg: #D889EA;
-  --prime-text: #0f172a;
-  --sec-text: #475569;
+  --prime-text: #000000;
+  --sec-text: #8C8C8C;
   --light-text: #ffffff;
   --prime-accent-300: #6A3482;
   --prime-accent-500: #64748b;
   --sec-accent-300: #cbd5e1;
   --sec-accent-500: #94a3b8;
+
+  /* buttons */
+  --btn-1:#C760CF;
+  --btn-2:#713CD4;
 }

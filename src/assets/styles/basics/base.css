@@ -74,6 +74,25 @@ button {
   cursor: pointer;
 }
 
+.project-btn {    
+  display: inline-block;
+  padding: 0.87rem 2.29rem;
+  font-size: 1.31093rem;
+  font-weight: 400;
+  text-decoration: none;
+  border: none;
+  border-radius: 100vw;
+  background: linear-gradient(180deg, var(--btn-1) 0%, var(--btn-2) 100%);
+  box-shadow: 0 3.059px 9.941px 0 var(--sec-bg) inset, 0 -3.059px 9.941px 0 var(--prime-accent-300) inset;
+
+  cursor: pointer;
+  margin-top: 0.25rem;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 13px;
 

@@ -1,3 +1,11 @@
+/* Insomnia */
+@font-face {
+  font-family: 'Insomnia';
+  src: url('../../fonts/Insomnia/Insomnia.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 /* Poppins - all weights and italics */
 @font-face {
   font-family: 'Poppins';
