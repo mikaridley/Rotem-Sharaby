@@ -129,6 +129,11 @@ if (typeof document !== 'undefined') {
       overflow: hidden;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
       cursor: pointer;
+      transition: transform 0.25s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
 
       .video-thumbnail {
         width: 100%;
