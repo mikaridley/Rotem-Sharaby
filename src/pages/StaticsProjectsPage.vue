@@ -23,6 +23,15 @@
             <img :src="src" :alt="`PandaZZZ ${i + 1}`" class="statics-img" />
           </div>
         </template>
+        <template v-else-if="section.id === 'others' && othersImages.length">
+          <div
+            v-for="(src, i) in othersImages"
+            :key="i"
+            class="statics-item"
+          >
+            <img :src="src" :alt="`Others ${i + 1}`" class="statics-img" />
+          </div>
+        </template>
         <template v-else>
           <div
             v-for="i in 8"
@@ -44,6 +53,9 @@ const particulaImages = Object.keys(particulaModules).sort().map(path => particu
 const pandazzzModules = import.meta.glob('../assets/imgs/pandazzz/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
 const pandazzzImages = Object.keys(pandazzzModules).sort().map(path => pandazzzModules[path])
 
+const othersModules = import.meta.glob('../assets/imgs/others/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
+const othersImages = Object.keys(othersModules).sort().map(path => othersModules[path])
+
 const sections = [
   { id: 'particula', title: 'Particula' },
   { id: 'pandazzz', title: 'PandaZZZ' },
@@ -57,14 +69,6 @@ const sections = [
   padding-inline: 2rem;
   padding-block: 5rem 4rem;
   background-color: #1a1628;
-  background-image:
-    radial-gradient(1.5px 1.5px at 20px 30px, rgba(255,255,255,0.45), transparent),
-    radial-gradient(1px 1px at 60px 10px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1.5px 1.5px at 100px 60px, rgba(255,255,255,0.35), transparent),
-    radial-gradient(1px 1px at 15px 90px, rgba(255,255,255,0.5), transparent),
-    radial-gradient(1.5px 1.5px at 150px 25px, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 80px 110px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1.5px 1.5px at 180px 70px, rgba(255,255,255,0.35), transparent);
   background-size: 220px 140px;
 
   .page-title {
