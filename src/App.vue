@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <Header :site-name="siteName" :pages="pages" :current-index="currentPageIndex" @navigate="goToPage" />
-    <main class="main">
+    <main class="main" :class="{ 'main-full-width': currentPageIndex === 7 }">
       <component :is="currentPageComponent" @navigate="currentPageIndex = $event" />
     </main>
     <Footer/>
@@ -19,12 +19,13 @@ import AboutPage from './pages/AboutPage.vue'
 import VideoProjectsPage from './pages/VideoProjectsPage.vue'
 import StaticsProjectsPage from './pages/StaticsProjectsPage.vue'
 import UGCProjectsPage from './pages/UGCProjectsPage.vue'
+import TheMaraudersPage from './pages/TheMaraudersPage.vue'
 
 const siteName = ref("Rotem Sharaby")
 const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
 const currentPageIndex = ref(0)
 const scrollingToAbout = ref(false)
-const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage, StaticsProjectsPage, UGCProjectsPage][currentPageIndex.value])
+const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage, StaticsProjectsPage, UGCProjectsPage, TheMaraudersPage][currentPageIndex.value])
 
 function goToPage(index) {
   if (index === 3) {
@@ -58,6 +59,10 @@ watch(currentPageIndex, (newVal) => {
 
   > * {
   grid-column: 2;
+}
+
+.main-full-width {
+  grid-column: 1 / -1;
 }
 
 :first-child,:last-child {

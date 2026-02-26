@@ -11,7 +11,13 @@
           <span class="project-year">{{ project.year }}</span>
           <h2 class="project-title">{{ project.title }}</h2>
           <p class="project-description">{{ project.description }}</p>
-          <a :href="project.link" class="project-btn">View Project</a>
+          <a
+            v-if="project.navigateTo !== undefined"
+            href="#"
+            class="project-btn"
+            @click.prevent="goToProject(project.navigateTo)"
+          >View Project</a>
+          <a v-else :href="project.link" class="project-btn">View Project</a>
         </div>
       </article>
     </div>
@@ -19,8 +25,14 @@
 </template>
 
 <script setup>
+const emit = defineEmits(['navigate'])
+
+function goToProject(index) {
+  emit('navigate', index)
+}
+
 const projects = [
-  { id: 1, year: '2025', title: 'The Marauders', description: 'A pirate-themed TBS game with grid-based tactical combat.', link: '#', image: 'src/assets/imgs/covers/The Marauders Cover.png' },
+  { id: 1, year: '2025', title: 'The Marauders', description: 'A pirate-themed TBS game with grid-based tactical combat.', link: '#', navigateTo: 7, image: 'src/assets/imgs/covers/The Marauders Cover.png' },
   { id: 2, year: '2024', title: 'Aether', description: 'A fantasy RPG that combines elemental powers with class-based gameplay in an immersive MMO experience.', link: '#', image: 'src/assets/imgs/covers/Aether Cover.png' },
   { id: 3, year: '2024', title: 'Battle of Wits', description: 'A trivia-based strategy game that blends logic puzzles with RPG elements and competitive PvP gameplay.', link: '', image: 'src/assets/imgs/covers/Bow Cover.png' },
   { id: 4, year: '2022', title: 'Kindred', description: 'a social platform connecting gamers worldwide.', link: '#', image: 'src/assets/imgs/covers/Kindred Cover.png' },
