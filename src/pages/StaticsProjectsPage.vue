@@ -5,19 +5,33 @@
     <section v-for="section in sections" :key="section.id" class="statics-section">
       <h2 class="section-heading">{{ section.title }}</h2>
       <div class="statics-grid">
-        <div
-          v-for="i in 8"
-          :key="i"
-          class="statics-placeholder"
-        >
-          <!-- Image will go here later -->
-        </div>
+        <template v-if="section.id === 'particula' && particulaImages.length">
+          <div
+            v-for="(src, i) in particulaImages"
+            :key="i"
+            class="statics-item"
+          >
+            <img :src="src" :alt="`Particula ${i + 1}`" class="statics-img" />
+          </div>
+        </template>
+        <template v-else>
+          <div
+            v-for="i in 8"
+            :key="i"
+            class="statics-placeholder"
+          >
+            <!-- Image will go here later -->
+          </div>
+        </template>
       </div>
     </section>
   </section>
 </template>
 
 <script setup>
+const particulaModules = import.meta.glob('../assets/imgs/particula/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
+const particulaImages = Object.keys(particulaModules).sort().map(path => particulaModules[path])
+
 const sections = [
   { id: 'particula', title: 'Particula' },
   { id: 'pandazzz', title: 'PandaZZZ' },
@@ -77,12 +91,24 @@ const sections = [
       gap: 1.5rem;
     }
 
-    .statics-placeholder {
+    .statics-placeholder,
+    .statics-item {
       aspect-ratio: 1;
-      background: #e0e0e0;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .statics-placeholder {
+      background: #e0e0e0;
+    }
+
+    .statics-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
   }
 }
