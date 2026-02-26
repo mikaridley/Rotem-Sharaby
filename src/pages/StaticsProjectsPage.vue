@@ -63,7 +63,6 @@
               :alt="activeModalImage.alt"
               class="statics-modal-img"
             />
-            <button type="button" class="statics-modal-close" aria-label="Close" @click="closeImage">×</button>
           </div>
         </div>
       </Transition>
@@ -225,25 +224,6 @@ const sections = [
   display: block;
   border-radius: 8px;
   background: #000;
-}
-
-.statics-modal-close {
-  position: absolute;
-  top: -2.5rem;
-  right: 0;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: #fff;
-  font-size: 2rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.statics-modal-close:hover {
-  opacity: 0.8;
 }
 
 .modal-enter-active,
