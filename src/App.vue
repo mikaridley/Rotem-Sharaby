@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import Header from './cmps/Header.vue'
 import Footer from './cmps/Footer.vue'
 import HomePage from './pages/HomePage.vue'
@@ -21,6 +21,10 @@ const siteName = ref("Rotem Sharaby")
 const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
 const currentPageIndex = ref(0)
 const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage][currentPageIndex.value])
+
+watch(currentPageIndex, () => {
+  window.scrollTo({ top: 0, behavior: 'instant' })
+})
 </script>
 
 <style scoped>

@@ -78,8 +78,6 @@
       display: block;
       width: 3rem;
       object-fit: contain;
-
-      &:fi
     }
   }
 }
