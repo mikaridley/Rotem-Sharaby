@@ -1,7 +1,7 @@
 <template>
   <section class="home-page">
     <div class="home-hero-title">
-      <InteractiveTitle />
+      <InteractiveTitle title="Rotem Sharaby" />
     </div>
 
     <div class="projects">

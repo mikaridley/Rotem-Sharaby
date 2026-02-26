@@ -27,7 +27,7 @@
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 
 const props = defineProps({
-  title: { type: String, default: 'ROTEM SHARABY' },
+  title: { type: String, default: '' },
   items: {
     type: Array,
     default: () => [
@@ -126,58 +126,58 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   text-align: center;
-}
 
-.interactive-title-main {
-  margin: 0;
-  color: #fff;
-  text-align: center;
-  font-family: 'Insomnia', sans-serif;
-  font-size: 6.42857rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
+  .interactive-title-main {
+    margin: 0;
+    color: #fff;
+    text-align: center;
+    font-family: 'Insomnia', sans-serif;
+    font-size: 6.42857rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 
-.interactive-title-track {
-  min-height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  width: 100%;
-  max-width: 40rem;
-  position: relative;
-}
+  .interactive-title-track {
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    max-width: 40rem;
+    position: relative;
 
-.interactive-title-strip {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  flex-shrink: 0;
-  will-change: transform;
-  transition: transform 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
+    &.no-transition .interactive-title-strip {
+      transition: none;
+    }
 
-.interactive-title-track.no-transition .interactive-title-strip {
-  transition: none;
-}
+    .interactive-title-strip {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-shrink: 0;
+      will-change: transform;
+      transition: transform 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
 
-.interactive-title-item {
-  flex-shrink: 0;
-  white-space: nowrap;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-  font-size: 2.28571rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  opacity: 0.35;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
+      .interactive-title-item {
+        flex-shrink: 0;
+        white-space: nowrap;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.28571rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        opacity: 0.35;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
 
-.interactive-title-item.is-center {
-  opacity: 1;
+        &.is-center {
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
 </style>
