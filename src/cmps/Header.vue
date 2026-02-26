@@ -22,6 +22,7 @@ defineProps({ currentIndex: { type: Number, default: 0 } })
 </script>
 <style scoped>
 .app-header {
+  position: relative;
   display: flex;
   align-items: center;
   padding-inline: 4.25rem;
@@ -76,6 +77,27 @@ defineProps({ currentIndex: { type: Number, default: 0 } })
   .social-links{
     display: flex;
     gap:1rem;
+  }
+
+  /* Bottom border: strongest under nav, fades at edges */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2.5px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #C6B8E4 15%,
+      #C6B8E4 35%,
+      #C6B8E4 50%,
+      #C6B8E4 65%,
+      #C6B8E4 85%,
+      transparent 100%
+    );
+    pointer-events: none;
   }
 }
 </style>
