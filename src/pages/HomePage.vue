@@ -1,11 +1,8 @@
 <template>
   <section class="home-page">
-    <img
-      class="home-video"
-      :src="homeGifSrc"
-      alt=""
-      aria-hidden="true"
-    />
+    <div class="home-hero-title">
+      <InteractiveTitle />
+    </div>
 
     <div class="projects">
       <h2 class="projects-title">Choose your interest:</h2>
@@ -51,9 +48,9 @@
 </template>
 
 <script setup>
+import InteractiveTitle from '../cmps/InteractiveTitle.vue'
 defineEmits(['navigate'])
 
-const homeGifSrc = new URL('../assets/videos/Home Video.gif', import.meta.url).href
 const homeReelSrc = new URL('../assets/videos/Home Reel.mp4', import.meta.url).href
 
 // Software logos from src/assets/imgs/sotfware – adjust filenames to match your folder
@@ -81,12 +78,8 @@ const softwareLogos = [
   overflow: hidden;
   background: transparent;
 
-  .home-video {
-    width: 1500px;
-    object-fit: cover;
-    display: block;
-    background: transparent;
-    margin:16rem 0 20rem 0;
+  .home-hero-title {
+    margin: 16rem 0 20rem 0;
   }
 
   .projects {
