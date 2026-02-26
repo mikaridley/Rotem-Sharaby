@@ -2,18 +2,109 @@
   <section class="ugc-projects-page">
     <h1 class="page-title">UGC Projects</h1>
     <div class="ugc-grid">
-      <div
-        v-for="i in 8"
-        :key="i"
-        class="ugc-placeholder"
+      <button
+        v-for="(video, index) in videos"
+        :key="index"
+        type="button"
+        class="ugc-video-box"
+        @click="openVideo(index)"
       >
-        <!-- Video will go here later -->
-      </div>
+        <video
+          :src="video.src"
+          preload="auto"
+          muted
+          playsinline
+          class="ugc-video-thumbnail"
+          @loadeddata="onThumbLoaded"
+        />
+        <span class="ugc-play-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+            <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.9)" stroke-width="2"/>
+            <path d="M26 20v24l20-12z" fill="#fff"/>
+          </svg>
+        </span>
+      </button>
     </div>
+
+    <Teleport to="body">
+      <Transition name="modal">
+        <div
+          v-if="activeIndex !== null"
+          class="ugc-modal-overlay"
+          @click.self="closeVideo"
+        >
+          <div class="ugc-modal-content">
+            <video
+              ref="modalVideoRef"
+              :src="activeVideoSrc"
+              controls
+              playsinline
+              autoplay
+              class="ugc-modal-player"
+              @ended="closeVideo"
+            />
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </section>
 </template>
 
 <script setup>
+import { ref, computed, watch, nextTick, onUnmounted } from 'vue'
+
+const activeIndex = ref(null)
+const modalVideoRef = ref(null)
+
+const videos = Array.from({ length: 3 }, (_, i) => ({
+  src: new URL(`../assets/videos/ugc projects/${i + 1}.mp4`, import.meta.url).href
+}))
+
+const activeVideoSrc = computed(() =>
+  activeIndex.value !== null ? videos[activeIndex.value].src : null
+)
+
+function openVideo(index) {
+  activeIndex.value = index
+}
+
+function closeVideo() {
+  if (modalVideoRef.value) {
+    modalVideoRef.value.pause()
+  }
+  activeIndex.value = null
+}
+
+function onThumbLoaded(e) {
+  const video = e.target
+  if (video.duration >= 1) {
+    video.currentTime = 1
+  }
+}
+
+watch(activeIndex, (val) => {
+  if (val === null) return
+  nextTick(() => {
+    const video = modalVideoRef.value
+    if (video) {
+      video.volume = 0.5
+      video.load()
+      video.play().catch(() => {})
+    }
+  })
+})
+
+function onKeydown(e) {
+  if (e.key === 'Escape') closeVideo()
+}
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', onKeydown)
+})
+
+if (typeof document !== 'undefined') {
+  document.addEventListener('keydown', onKeydown)
+}
 </script>
 
 <style scoped>
@@ -21,6 +112,15 @@
   min-height: 100vh;
   padding-inline: 2rem;
   padding-block: 5rem 4rem;
+  background-color: #1a1628;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20px 30px, rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 60px 10px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1.5px 1.5px at 100px 60px, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1px 1px at 15px 90px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 150px 25px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 80px 110px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1.5px 1.5px at 180px 70px, rgba(255,255,255,0.35), transparent);
   background-size: 220px 140px;
 
   .page-title {
@@ -43,12 +143,49 @@
     max-width: 72rem;
     margin-inline: auto;
 
-    .ugc-placeholder {
+    .ugc-video-box {
+      position: relative;
       aspect-ratio: 9 / 16;
-      background: #e0e0e0;
+      padding: 0;
+      border: none;
       border-radius: 12px;
+      overflow: hidden;
+      background: #e0e0e0;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: transform 0.25s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .ugc-video-thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .ugc-play-icon {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        pointer-events: none;
+
+        svg {
+          width: 4rem;
+          height: 4rem;
+          filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.6));
+          transition: transform 0.25s ease;
+        }
+      }
+
+      &:hover .ugc-play-icon svg {
+        transform: scale(1.08);
+      }
     }
 
     @media (max-width: 900px) {
@@ -59,5 +196,44 @@
       grid-template-columns: 1fr;
     }
   }
+}
+</style>
+
+<style>
+.ugc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.ugc-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.ugc-modal-player {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  background: #000;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.2s ease;
+}
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
 }
 </style>
