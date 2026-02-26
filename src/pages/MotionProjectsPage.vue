@@ -34,7 +34,7 @@ function goToProject(index) {
 const projects = [
   { id: 1, year: '2021-2025', title: 'Videos Projects', description: 'A collection of video projects I created from concept to final execution.', link: '#', navigateTo: 4, image: 'src/assets/imgs/covers/Videos Projects - Cover.png' },
   { id: 2, year: '2021-2025', title: 'Statics Projects', description: 'A collection of high-performing static ads designed to capture attention and drive engagement.', link: '#', navigateTo: 5, image: 'src/assets/imgs/covers/Statics Projects - Cover.png' },
-  { id: 3, year: '2021-2025', title: 'UGC Projects', description: 'This UGC collection features ads designed to build trust and boost engagement.', link: '', image: 'src/assets/imgs/covers/UGC Projects - Cover.png' },
+  { id: 3, year: '2021-2025', title: 'UGC Projects', description: 'This UGC collection features ads designed to build trust and boost engagement.', link: '', navigateTo: 6, image: 'src/assets/imgs/covers/UGC Projects - Cover.png' },
 ]
 </script>
 
