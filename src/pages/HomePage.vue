@@ -32,8 +32,8 @@
       />
     </div>
 
-    <div class="about-me">
-      <h1 class="about-me-title">About me</h1>
+    <div class="about-me" id="about-me">
+      <h1 class="about-me-title" id="about-me-title">About me</h1>
       <div class="about-me-card">
         <h2 class="about-me-heading">My Name is <span class="about-me-name">Rotem Sharaby</span></h2>
         <p class="about-me-text">I'm a multidisciplinary designer specializing in motion graphics, UX/UI for gaming, and digital product design.</p>
@@ -79,7 +79,7 @@ const softwareLogos = [
   background: transparent;
 
   .home-hero-title {
-    margin: 16rem 0 20rem 0;
+    margin: 16rem 0 15rem 0;
   }
 
   .projects {
@@ -125,7 +125,7 @@ const softwareLogos = [
       justify-content: center;
       align-items: center;
       gap: 1rem;
-      margin-top:3.4rem;
+      margin-top:1.5rem;
       margin-bottom:6rem;
 
       .software-logo {

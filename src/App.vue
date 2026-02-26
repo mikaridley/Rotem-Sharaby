@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <Header :site-name="siteName" :pages="pages" :current-index="currentPageIndex" @navigate="currentPageIndex = $event" />
+    <Header :site-name="siteName" :pages="pages" :current-index="currentPageIndex" @navigate="goToPage" />
     <main class="main">
       <component :is="currentPageComponent" @navigate="currentPageIndex = $event" />
     </main>
@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import Header from './cmps/Header.vue'
 import Footer from './cmps/Footer.vue'
 import HomePage from './pages/HomePage.vue'
@@ -20,10 +20,29 @@ import AboutPage from './pages/AboutPage.vue'
 const siteName = ref("Rotem Sharaby")
 const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
 const currentPageIndex = ref(0)
+const scrollingToAbout = ref(false)
 const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage][currentPageIndex.value])
 
-watch(currentPageIndex, () => {
-  window.scrollTo({ top: 0, behavior: 'instant' })
+function goToPage(index) {
+  if (index === 3) {
+    scrollingToAbout.value = true
+    currentPageIndex.value = 0
+    nextTick(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById('about-me-title')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          scrollingToAbout.value = false
+        })
+      })
+    })
+  } else {
+    currentPageIndex.value = index
+  }
+}
+
+watch(currentPageIndex, (newVal) => {
+  if (!scrollingToAbout.value) window.scrollTo({ top: 0, behavior: 'instant' })
 })
 </script>
 
