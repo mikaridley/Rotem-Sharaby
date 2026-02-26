@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <Header :site-name="siteName" :pages="pages" :current-index="currentPageIndex" @navigate="goToPage" />
-    <main class="main" :class="{ 'main-full-width': currentPageIndex === 7 }">
+    <main class="main" :class="{ 'main-full-width': currentPageIndex === 7 || currentPageIndex === 8 }">
       <component :is="currentPageComponent" @navigate="currentPageIndex = $event" />
     </main>
     <Footer/>
@@ -20,12 +20,13 @@ import VideoProjectsPage from './pages/VideoProjectsPage.vue'
 import StaticsProjectsPage from './pages/StaticsProjectsPage.vue'
 import UGCProjectsPage from './pages/UGCProjectsPage.vue'
 import TheMaraudersPage from './pages/TheMaraudersPage.vue'
+import AetherPage from './pages/AetherPage.vue'
 
 const siteName = ref("Rotem Sharaby")
 const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
 const currentPageIndex = ref(0)
 const scrollingToAbout = ref(false)
-const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage, StaticsProjectsPage, UGCProjectsPage, TheMaraudersPage][currentPageIndex.value])
+const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage, StaticsProjectsPage, UGCProjectsPage, TheMaraudersPage, AetherPage][currentPageIndex.value])
 
 function goToPage(index) {
   if (index === 3) {
