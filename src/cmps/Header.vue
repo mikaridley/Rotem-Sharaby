@@ -10,8 +10,8 @@
       <a href="#" class="nav-link" :class="{ active: currentIndex === 3 }" @click.prevent="$emit('navigate', 3)">About</a>
     </nav>
     <div class="social-links">
-      <a href="https://wa.me/972546000000" target="_blank"><img src="../assets/imgs/social/Whatsapp.png" alt="Whatsapp" /></a>
-      <a href="mailto:info@example.com" target="_blank"><img src="../assets/imgs/social/Gmail.png" alt="Gmail" /></a>
+      <a href="https://wa.me/972546000000" target="_blank"><img src="../assets/imgs/social/Whatsapp.svg" alt="Whatsapp" /></a>
+      <a href="mailto:info@example.com" target="_blank"><img src="../assets/imgs/social/Gmail.svg" alt="Gmail" /></a>
       <a href="https://www.linkedin.com/in/your-profile" target="_blank"><img src="../assets/imgs/social/Linkedin.png" alt="Linkedin" /></a>
     </div>
   </header>
@@ -77,6 +77,10 @@ defineProps({ currentIndex: { type: Number, default: 0 } })
   .social-links{
     display: flex;
     gap:1rem;
+
+    a{
+      width:2.5rem ;
+    }
   }
 
   /* Bottom border: strongest under nav, fades at edges */

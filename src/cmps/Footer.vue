@@ -1,8 +1,19 @@
 <template>
   <footer class="app-footer">
-    <img src="" alt="Logo" />
-    <p>Living, learning, & leveling up one day at a time.</p>
-    <p class="copyright">© 2026 All rights reserved to Mika Ridley</p>
+    <div class="footer-contact">
+      <h2 class="footer-title">Contact me:</h2>
+      <div class="footer-social">
+        <a href="https://wa.me/972546000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <img src="../assets/imgs/social/Whatsapp.svg" alt="WhatsApp" />
+        </a>
+        <a href="mailto:info@example.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
+          <img src="../assets/imgs/social/Gmail.svg" alt="Gmail" />
+        </a>
+        <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <img src="../assets/imgs/social/Linkedin.png" alt="LinkedIn" />
+        </a>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -11,32 +22,65 @@
 
 <style scoped>
 .app-footer {
-  display: grid;
-  justify-items: center;
-  gap: 1rem;
-  padding-block-start: 2rem;
-  padding-inline: 1rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: var(--prime-bg);
 
-  background-color: var(--sec-accent-300);
-
-  > * {
-    grid-column: span 2;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2.5px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #C6B8E4 15%,
+      #C6B8E4 35%,
+      #C6B8E4 50%,
+      #C6B8E4 65%,
+      #C6B8E4 85%,
+      transparent 100%
+    );
+    pointer-events: none;
   }
 
-  > img {
-    width: 200px;
+  .footer-contact {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  > p {
-    font-size: 1.2rem;
-    color: var(--sec-text);
-    text-align: center;
+  .footer-title {
+    font-size: 1.28571rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 
-  .copyright {
-    justify-self: start;
-    font-size: 0.8rem;
+  .footer-social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    a {
+      display: block;
+      line-height: 0;
+    }
+
+    img {
+      display: block;
+      width: 3rem;
+      object-fit: contain;
+
+      &:fi
+    }
   }
 }
-
 </style>
