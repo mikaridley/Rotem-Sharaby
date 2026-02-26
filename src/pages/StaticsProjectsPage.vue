@@ -105,6 +105,10 @@ const sections = [
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .statics-placeholder,
@@ -126,12 +130,6 @@ const sections = [
       object-fit: cover;
       display: block;
     }
-  }
-}
-
-@media (max-width: 768px) {
-  .statics-projects-page .statics-section .statics-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>
