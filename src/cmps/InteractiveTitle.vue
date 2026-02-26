@@ -49,6 +49,9 @@ const trackWidth = ref(400)
 const stripWidth = ref(0)
 const noTransition = ref(false)
 let timer = null
+let resetTimeoutId = null
+let resetScheduled = false
+const TRANSITION_MS = 550
 
 const n = computed(() => props.items.length)
 
@@ -70,24 +73,25 @@ function isCenterIndex(i) {
 }
 
 function advance() {
+  if (resetScheduled) return
   const step = itemWidth.value
   const totalWidth = n.value * step
-  // Start with second copy's first item centered so we see first copy's last on left
   const initialOffset = stripWidth.value / 2 - n.value * itemWidth.value - itemWidth.value / 2
 
   stripOffset.value -= step
 
-  // After n steps we've scrolled one full set; reset to same visual (second copy's first centered)
   if (stripOffset.value <= initialOffset - totalWidth + 5) {
-    noTransition.value = true
-    stripOffset.value = initialOffset
-    nextTick(() => {
+    resetScheduled = true
+    resetTimeoutId = setTimeout(() => {
+      noTransition.value = true
+      stripOffset.value = initialOffset
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           noTransition.value = false
+          resetScheduled = false
         })
       })
-    })
+    }, TRANSITION_MS)
   }
 }
 
@@ -111,6 +115,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (timer) clearInterval(timer)
+  if (resetTimeoutId) clearTimeout(resetTimeoutId)
 })
 </script>
 
