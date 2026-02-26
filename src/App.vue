@@ -2,7 +2,7 @@
   <div class="app">
     <Header :site-name="siteName" :pages="pages" :current-index="currentPageIndex" @navigate="currentPageIndex = $event" />
     <main class="main">
-      <component :is="currentPageComponent" />
+      <component :is="currentPageComponent" @navigate="currentPageIndex = $event" />
     </main>
     <Footer/>
   </div>

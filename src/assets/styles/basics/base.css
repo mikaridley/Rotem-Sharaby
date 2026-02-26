@@ -84,14 +84,22 @@ button {
   border: none;
   border-radius: 100vw;
   background: linear-gradient(180deg, var(--btn-1) 0%, var(--btn-2) 100%);
-  box-shadow: 0 3.059px 9.941px 0 var(--sec-bg) inset, 0 -3.059px 9.941px 0 var(--prime-accent-300) inset;
+  box-shadow: 0 4px 13px 0 #D889EA inset, 0 -4px 13px 0 #4F228D inset;
+  transition: transform 0.15s ease, opacity 0.15s ease;
 
   cursor: pointer;
   margin-top: 0.25rem;
 
   &:hover {
-    opacity: 0.9;
+    background: linear-gradient(180deg, var(--btn-1-hover) 0%, var(--btn-2-hover) 100%);
+    box-shadow: 0 4px 13px 0 #B064C2 inset, 0 -4px 13px 0 #1B053B inset;
   }
+
+  &:active {
+    background: linear-gradient(180deg, #E29EE8 0%, #9B73E5 100%);
+    box-shadow: 0 4px 13px 0 #4F228D inset, 0 -4px 13px 0 #D889EA inset;
+  }
+
 }
 
 ::-webkit-scrollbar {
