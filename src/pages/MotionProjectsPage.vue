@@ -16,8 +16,8 @@
             href="#"
             class="project-btn"
             @click.prevent="$emit('navigate', project.navigateTo)"
-          >View Project</a>
-          <a v-else :href="project.link" class="project-btn">View Project</a>
+          >View Projects</a>
+          <a v-else :href="project.link" class="project-btn">View Projects</a>
         </div>
       </article>
     </div>
