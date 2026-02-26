@@ -38,12 +38,26 @@ function goToPage(index) {
     currentPageIndex.value = 0
     nextTick(() => {
       window.scrollTo({ top: 0, behavior: 'instant' })
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          document.getElementById('about-me-title')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          scrollingToAbout.value = false
-        })
-      })
+      let attempts = 0
+      const scrollToAbout = () => {
+        const el = document.getElementById('about-me-title')
+        if (el) {
+          // Wait for layout to settle (e.g. showreel video height) before measuring
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setTimeout(() => {
+                const y = el.getBoundingClientRect().top + window.scrollY
+                window.scrollTo({ top: y, left: 0, behavior: 'smooth' })
+                scrollingToAbout.value = false
+              }, 100)
+            })
+          })
+          return
+        }
+        if (++attempts < 40) requestAnimationFrame(scrollToAbout)
+        else scrollingToAbout.value = false
+      }
+      requestAnimationFrame(() => requestAnimationFrame(scrollToAbout))
     })
   } else {
     currentPageIndex.value = index
