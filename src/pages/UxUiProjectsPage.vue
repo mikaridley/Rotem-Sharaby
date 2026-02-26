@@ -15,7 +15,7 @@
             v-if="project.navigateTo !== undefined"
             href="#"
             class="project-btn"
-            @click.prevent="goToProject(project.navigateTo)"
+            @click.prevent="goToProject(Number(project.navigateTo))"
           >View Project</a>
           <a v-else :href="project.link" class="project-btn">View Project</a>
         </div>
@@ -37,7 +37,7 @@ const projects = [
   { id: 3, year: '2024', title: 'Battle of Wits', description: 'A trivia-based strategy game that blends logic puzzles with RPG elements and competitive PvP gameplay.', link: '', navigateTo: 9, image: 'src/assets/imgs/covers/Bow Cover.png' },
   { id: 4, year: '2022', title: 'Kindred', description: 'a social platform connecting gamers worldwide.', link: '#', navigateTo: 10, image: 'src/assets/imgs/covers/Kindred Cover.png' },
   { id: 5, year: '2022', title: 'Sweet Rush', description: 'A delivery app specializing in sweets, designed for a seamless e-commerce experience.', link: '#', navigateTo: 11, image: 'src/assets/imgs/covers/Sweet Rush Cover.gif' },
-  { id: 6, year: '2022', title: 'Loud House', description: 'Loud House is a smart home music control app that lets users manage speaker playback seamlessly.', link: '#', image: 'src/assets/imgs/covers/Loud House Cover.gif' }
+  { id: 6, year: '2022', title: 'Loud House', description: 'Loud House is a smart home music control app that lets users manage speaker playback seamlessly.', link: '#', navigateTo: 12, image: 'src/assets/imgs/covers/Loud House Cover.gif' }
 ]
 </script>
 

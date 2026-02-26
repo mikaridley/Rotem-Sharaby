@@ -1,8 +1,8 @@
 <template>
   <div class="app">
     <Header :site-name="siteName" :pages="pages" :current-index="currentPageIndex" @navigate="goToPage" />
-    <main class="main" :class="{ 'main-full-width': currentPageIndex === 7 || currentPageIndex === 8 || currentPageIndex === 9 || currentPageIndex === 10 || currentPageIndex === 11 }">
-      <component :is="currentPageComponent" @navigate="currentPageIndex = $event" />
+    <main class="main" :class="{ 'main-full-width': currentPageIndex === 7 || currentPageIndex === 8 || currentPageIndex === 9 || currentPageIndex === 10 || currentPageIndex === 11 || currentPageIndex === 12 }">
+      <component :is="currentPageComponent" @navigate="onMainNavigate" />
     </main>
     <Footer/>
   </div>
@@ -24,12 +24,13 @@ import AetherPage from './pages/AetherPage.vue'
 import BattleOfWitsPage from './pages/BattleOfWitsPage.vue'
 import KindredPage from './pages/KindredPage.vue'
 import SweetRushPage from './pages/SweetRushPage.vue'
+import LoudHousePage from './pages/LoudHousePage.vue'
 
 const siteName = ref("Rotem Sharaby")
 const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
 const currentPageIndex = ref(0)
 const scrollingToAbout = ref(false)
-const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage, StaticsProjectsPage, UGCProjectsPage, TheMaraudersPage, AetherPage, BattleOfWitsPage, KindredPage, SweetRushPage][currentPageIndex.value])
+const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage, StaticsProjectsPage, UGCProjectsPage, TheMaraudersPage, AetherPage, BattleOfWitsPage, KindredPage, SweetRushPage, LoudHousePage][currentPageIndex.value])
 
 function goToPage(index) {
   if (index === 3) {
@@ -47,6 +48,10 @@ function goToPage(index) {
   } else {
     currentPageIndex.value = index
   }
+}
+
+function onMainNavigate(index) {
+  currentPageIndex.value = Number(index)
 }
 
 watch(currentPageIndex, (newVal) => {
