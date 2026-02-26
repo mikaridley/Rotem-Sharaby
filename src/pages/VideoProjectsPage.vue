@@ -205,8 +205,7 @@ if (typeof document !== 'undefined') {
 
 .video-modal-player {
   width: 110rem;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 45vw;
   object-fit: contain;
   display: block;
   border-radius: 8px;
