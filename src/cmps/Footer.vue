@@ -3,13 +3,13 @@
     <div class="footer-contact">
       <h2 class="footer-title">Contact me:</h2>
       <div class="footer-social">
-        <a href="https://wa.me/972546000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <a href="https://wa.me/972526269621" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
           <img src="../assets/imgs/social/Whatsapp.svg" alt="WhatsApp" />
         </a>
-        <a href="mailto:info@example.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
+        <a href="#" class="mail-link" rel="noopener noreferrer" aria-label="Copy email" @click.prevent="handleCopy">
           <img src="../assets/imgs/social/Gmail.svg" alt="Gmail" />
         </a>
-        <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <img src="../assets/imgs/social/Linkedin.png" alt="LinkedIn" />
         </a>
       </div>
@@ -18,6 +18,20 @@
 </template>
 
 <script setup>
+import { inject } from 'vue'
+
+const email = 'rotem1203@gmail.com'
+const showSuccessMsg = inject('showSuccessMsg')
+
+async function handleCopy(ev) {
+  ev.preventDefault()
+  try {
+    await navigator.clipboard.writeText(email)
+    showSuccessMsg?.('Email has been copied!')
+  } catch (err) {
+    console.error('Unable to copy', err)
+  }
+}
 </script>
 
 <style scoped>

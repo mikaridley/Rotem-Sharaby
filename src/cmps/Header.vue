@@ -10,15 +10,30 @@
       <a href="#" class="nav-link" :class="{ active: currentIndex === 3 }" @click.prevent="$emit('navigate', 3)">About</a>
     </nav>
     <div class="social-links">
-      <a href="https://wa.me/972546000000" target="_blank"><img src="../assets/imgs/social/Whatsapp.svg" alt="Whatsapp" /></a>
-      <a href="mailto:info@example.com" target="_blank"><img src="../assets/imgs/social/Gmail.svg" alt="Gmail" /></a>
-      <a href="https://www.linkedin.com/in/your-profile" target="_blank"><img src="../assets/imgs/social/Linkedin.png" alt="Linkedin" /></a>
+      <a href="https://wa.me/972526269621" target="_blank"><img src="../assets/imgs/social/Whatsapp.svg" alt="Whatsapp" /></a>
+      <a href="#" class="mail-link" aria-label="Copy email" @click.prevent="handleCopy"><img src="../assets/imgs/social/Gmail.svg" alt="Gmail" /></a>
+      <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank"><img src="../assets/imgs/social/Linkedin.png" alt="Linkedin" /></a>
     </div>
   </header>
 </template>
 <script setup>
+import { inject } from 'vue'
+
 defineEmits(['navigate'])
 defineProps({ currentIndex: { type: Number, default: 0 } })
+
+const email = 'rotem1203@gmail.com'
+const showSuccessMsg = inject('showSuccessMsg')
+
+async function handleCopy(ev) {
+  ev.preventDefault()
+  try {
+    await navigator.clipboard.writeText(email)
+    showSuccessMsg?.('Email has been copied!')
+  } catch (err) {
+    console.error('Unable to copy', err)
+  }
+}
 </script>
 <style scoped>
 .app-header {

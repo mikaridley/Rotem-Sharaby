@@ -5,11 +5,16 @@
       <component :is="currentPageComponent" @navigate="onMainNavigate" />
     </main>
     <Footer/>
+    <Transition name="toast">
+      <div v-if="toastVisible" class="copy-toast" role="status" aria-live="polite">
+        {{ toastMessage }}
+      </div>
+    </Transition>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, provide } from 'vue'
 import Header from './cmps/Header.vue'
 import Footer from './cmps/Footer.vue'
 import HomePage from './pages/HomePage.vue'
@@ -30,6 +35,22 @@ const siteName = ref("Rotem Sharaby")
 const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
 const currentPageIndex = ref(0)
 const scrollingToAbout = ref(false)
+const toastVisible = ref(false)
+const toastMessage = ref('')
+let toastTimeout = null
+
+function showSuccessMsg(message) {
+  toastMessage.value = message
+  toastVisible.value = true
+  if (toastTimeout) clearTimeout(toastTimeout)
+  toastTimeout = setTimeout(() => {
+    toastVisible.value = false
+    toastTimeout = null
+  }, 2800)
+}
+
+provide('showSuccessMsg', showSuccessMsg)
+
 const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage, StaticsProjectsPage, UGCProjectsPage, TheMaraudersPage, AetherPage, BattleOfWitsPage, KindredPage, SweetRushPage, LoudHousePage][currentPageIndex.value])
 
 function goToPage(index) {
@@ -92,5 +113,38 @@ watch(currentPageIndex, (newVal) => {
   grid-column: 1/-1;
 }
 
+.copy-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  background: rgba(26, 19, 42, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 184, 228, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: var(--light-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(0.5rem);
+}
+.toast-enter-to,
+.toast-leave-from {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 }
 </style>
