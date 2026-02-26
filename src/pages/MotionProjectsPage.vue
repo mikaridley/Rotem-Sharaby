@@ -15,7 +15,7 @@
             v-if="project.navigateTo !== undefined"
             href="#"
             class="project-btn"
-            @click.prevent="$emit('navigate', project.navigateTo)"
+            @click.prevent="goToProject(project.navigateTo)"
           >View Projects</a>
           <a v-else :href="project.link" class="project-btn">View Projects</a>
         </div>
@@ -25,11 +25,15 @@
 </template>
 
 <script setup>
-defineEmits(['navigate'])
+const emit = defineEmits(['navigate'])
+
+function goToProject(index) {
+  emit('navigate', index)
+}
 
 const projects = [
   { id: 1, year: '2021-2025', title: 'Videos Projects', description: 'A collection of video projects I created from concept to final execution.', link: '#', navigateTo: 4, image: 'src/assets/imgs/covers/Videos Projects - Cover.png' },
-  { id: 2, year: '2021-2025', title: 'Statics Projects', description: 'A collection of high-performing static ads designed to capture attention and drive engagement.', link: '#', image: 'src/assets/imgs/covers/Statics Projects - Cover.png' },
+  { id: 2, year: '2021-2025', title: 'Statics Projects', description: 'A collection of high-performing static ads designed to capture attention and drive engagement.', link: '#', navigateTo: 5, image: 'src/assets/imgs/covers/Statics Projects - Cover.png' },
   { id: 3, year: '2021-2025', title: 'UGC Projects', description: 'This UGC collection features ads designed to build trust and boost engagement.', link: '', image: 'src/assets/imgs/covers/UGC Projects - Cover.png' },
 ]
 </script>
