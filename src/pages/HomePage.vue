@@ -26,6 +26,13 @@
 
     <div class="showreel">
       <h1 class="showreel-title">showreel</h1>
+      <video
+        class="showreel-video"
+        :src="homeReelSrc"
+        controls
+        playsinline
+        aria-label="Home reel"
+      />
     </div>
   </section>
 </template>
@@ -34,6 +41,7 @@
 defineEmits(['navigate'])
 
 const homeGifSrc = new URL('../assets/videos/Home Video.gif', import.meta.url).href
+const homeReelSrc = new URL('../assets/videos/Home Reel.mp4', import.meta.url).href
 
 // Software logos from src/assets/imgs/sotfware – adjust filenames to match your folder
 const softwareLogos = [
@@ -123,6 +131,8 @@ const softwareLogos = [
   .showreel{
   display: grid;
   place-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
 
     .showreel-title{
       text-transform: uppercase;
@@ -131,6 +141,13 @@ const softwareLogos = [
       font-weight: 400;
       line-height: normal;
       font-family: 'Insomnia', sans-serif;
+    }
+
+    .showreel-video {
+      width: 100%;
+      max-width: 92rem;
+      max-height:52rem;
+      border-radius: 12px;
     }
   }
 }
