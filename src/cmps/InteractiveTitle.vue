@@ -15,6 +15,7 @@
           :key="`${i}-${text}`"
           class="interactive-title-item"
           :class="{ 'is-center': isCenterIndex(i) }"
+          :ref="el => setItemEl(el, i)"
         >
           {{ text }}
         </span>
@@ -42,11 +43,13 @@ const props = defineProps({
   intervalMs: { type: Number, default: 3000 }
 })
 
+const GAP = 32
 const trackRef = ref(null)
+const itemEls = ref([])
 const stripOffset = ref(0)
-const itemWidth = ref(260)
-const trackWidth = ref(400)
 const stripWidth = ref(0)
+const centerPositions = ref([]) // center position of each item in strip (px from left)
+const currentCenterIndex = ref(0) // strip index (0..3n-1) we're centering
 const noTransition = ref(false)
 let timer = null
 let resetTimeoutId = null
@@ -55,36 +58,55 @@ const TRANSITION_MS = 550
 
 const n = computed(() => props.items.length)
 
-// Three copies so there's always a faded item on left and right (loop never shows empty sides)
 const stripItems = computed(() => [...props.items, ...props.items, ...props.items])
 
-// Which logical index (0..n-1) is at track center
-const centerLogicalIndex = computed(() => {
-  const w = itemWidth.value
-  const sw = stripWidth.value
-  if (w <= 0 || sw <= 0) return 0
-  const stripIndexAtCenter = (sw / 2 - w / 2 - stripOffset.value) / w
-  const raw = Math.round(stripIndexAtCenter)
-  return ((raw % n.value) + n.value) % n.value
-})
+function setItemEl(el, i) {
+  if (el) itemEls.value[i] = el
+}
 
 function isCenterIndex(i) {
-  return (i % n.value) === centerLogicalIndex.value
+  return (i % n.value) === (currentCenterIndex.value % n.value)
+}
+
+function measureStrip() {
+  const els = itemEls.value.filter(Boolean)
+  if (els.length === 0) return
+  const widths = els.map(el => el.getBoundingClientRect().width)
+  let left = 0
+  const positions = []
+  for (let i = 0; i < widths.length; i++) {
+    positions.push(left + widths[i] / 2)
+    left += widths[i] + GAP
+  }
+  stripWidth.value = left - GAP
+  centerPositions.value = positions
+}
+
+function updateOffsetForCenter() {
+  const positions = centerPositions.value
+  if (positions.length === 0) return
+  const idx = currentCenterIndex.value
+  // Track centers the strip; item center = (trackW - stripWidth)/2 + stripOffset + positions[idx]. Set = trackW/2 => stripOffset = stripWidth/2 - positions[idx]
+  stripOffset.value = stripWidth.value / 2 - positions[idx]
 }
 
 function advance() {
-  if (resetScheduled) return
-  const step = itemWidth.value
-  const totalWidth = n.value * step
-  const initialOffset = stripWidth.value / 2 - n.value * itemWidth.value - itemWidth.value / 2
+  if (resetScheduled || centerPositions.value.length === 0) return
+  const len = centerPositions.value.length
+  const nextIndex = currentCenterIndex.value + 1
+  if (nextIndex >= len) return
 
-  stripOffset.value -= step
+  currentCenterIndex.value = nextIndex
+  const positions = centerPositions.value
+  stripOffset.value = stripWidth.value / 2 - positions[nextIndex]
 
-  if (stripOffset.value <= initialOffset - totalWidth + 5) {
+  // When we've shown the last item of the second copy (index 2n-1), next would be 2n; reset to n so we loop
+  if (nextIndex >= 2 * n.value) {
     resetScheduled = true
     resetTimeoutId = setTimeout(() => {
       noTransition.value = true
-      stripOffset.value = initialOffset
+      currentCenterIndex.value = n.value
+      stripOffset.value = stripWidth.value / 2 - centerPositions.value[n.value]
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           noTransition.value = false
@@ -98,17 +120,11 @@ function advance() {
 onMounted(() => {
   if (props.items.length <= 1) return
   nextTick(() => {
-    if (!trackRef.value) return
-    trackWidth.value = trackRef.value.offsetWidth
-    const firstEl = trackRef.value.querySelector('.interactive-title-item')
-    if (firstEl) {
-      const rect = firstEl.getBoundingClientRect()
-      const gap = 32
-      itemWidth.value = rect.width + gap
+    measureStrip()
+    if (centerPositions.value.length > 0) {
+      currentCenterIndex.value = n.value
+      updateOffsetForCenter()
     }
-    stripWidth.value = stripItems.value.length * itemWidth.value
-    // Second copy's first item (index n) centered => last item of first copy visible on left
-    stripOffset.value = stripWidth.value / 2 - n.value * itemWidth.value - itemWidth.value / 2
   })
   timer = setInterval(advance, props.intervalMs)
 })
@@ -155,7 +171,7 @@ onUnmounted(() => {
     .interactive-title-strip {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 32px;
       flex-shrink: 0;
       will-change: transform;
       transition: transform 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
