@@ -23,6 +23,10 @@
         />
       </div>
     </div>
+
+    <div class="showreel">
+      <h1 class="showreel-title">showreel</h1>
+    </div>
   </section>
 </template>
 
@@ -61,6 +65,7 @@ const softwareLogos = [
     object-fit: cover;
     display: block;
     background: transparent;
+    margin:16rem 0 20rem 0;
   }
 
   .projects {
@@ -104,12 +109,28 @@ const softwareLogos = [
       justify-content: center;
       align-items: center;
       gap: 1rem;
-    }
+      margin-top:3.4rem;
+      margin-bottom:6rem;
 
-    .software-logo {
-      width: 3rem;
-      height: 3rem;
-      object-fit: contain;
+      .software-logo {
+        width: 3rem;
+        height: 3rem;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .showreel{
+  display: grid;
+  place-items: center;
+
+    .showreel-title{
+      text-transform: uppercase;
+      font-size: 3.42857rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      font-family: 'Insomnia', sans-serif;
     }
   }
 }
