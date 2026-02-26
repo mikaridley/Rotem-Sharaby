@@ -54,7 +54,6 @@ defineProps({ currentIndex: { type: Number, default: 0 } })
     margin-right: 4.12rem;
 
     .nav-link {
-      position: relative;
       padding: 1rem;
       text-decoration: none;
       font-size: 1rem;
@@ -62,9 +61,14 @@ defineProps({ currentIndex: { type: Number, default: 0 } })
       font-weight: 400;
       line-height: normal;
 
-      &:hover, &.active{
+      &:hover {
         color: var(--sec-bg);
-        font-weight: 800;
+      }
+
+      /* Simulate bold with shadow so layout never shifts */
+      &.active {
+        color: var(--sec-bg);
+        text-shadow: 0 0 0.9px currentColor, 0 0 0.9px currentColor, 0 0 0.9px currentColor;
       }
     }
   }
