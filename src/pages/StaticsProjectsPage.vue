@@ -14,6 +14,15 @@
             <img :src="src" :alt="`Particula ${i + 1}`" class="statics-img" />
           </div>
         </template>
+        <template v-else-if="section.id === 'pandazzz' && pandazzzImages.length">
+          <div
+            v-for="(src, i) in pandazzzImages"
+            :key="i"
+            class="statics-item"
+          >
+            <img :src="src" :alt="`PandaZZZ ${i + 1}`" class="statics-img" />
+          </div>
+        </template>
         <template v-else>
           <div
             v-for="i in 8"
@@ -31,6 +40,9 @@
 <script setup>
 const particulaModules = import.meta.glob('../assets/imgs/particula/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
 const particulaImages = Object.keys(particulaModules).sort().map(path => particulaModules[path])
+
+const pandazzzModules = import.meta.glob('../assets/imgs/pandazzz/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
+const pandazzzImages = Object.keys(pandazzzModules).sort().map(path => pandazzzModules[path])
 
 const sections = [
   { id: 'particula', title: 'Particula' },
