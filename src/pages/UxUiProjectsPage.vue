@@ -20,12 +20,12 @@
 
 <script setup>
 const projects = [
-  { id: 1, year: '2025', title: 'The Marauders', description: 'A pirate-themed TBS game with grid-based tactical combat.', link: '#', image: 'src/assets/imgs/covers/Sweet Rush Cover.png' },
+  { id: 1, year: '2025', title: 'The Marauders', description: 'A pirate-themed TBS game with grid-based tactical combat.', link: '#', image: 'src/assets/imgs/covers/The Marauders Cover.png' },
   { id: 2, year: '2024', title: 'Aether', description: 'A fantasy RPG that combines elemental powers with class-based gameplay in an immersive MMO experience.', link: '#', image: 'src/assets/imgs/covers/Aether Cover.png' },
   { id: 3, year: '2024', title: 'Battle of Wits', description: 'A trivia-based strategy game that blends logic puzzles with RPG elements and competitive PvP gameplay.', link: '', image: 'src/assets/imgs/covers/Bow Cover.png' },
   { id: 4, year: '2022', title: 'Kindred', description: 'a social platform connecting gamers worldwide.', link: '#', image: 'src/assets/imgs/covers/Kindred Cover.png' },
-  { id: 5, year: '2022', title: 'Sweet Rush', description: 'A delivery app specializing in sweets, designed for a seamless e-commerce experience.', link: '#', image: 'src/assets/imgs/covers/Sweet Rush Cover.png' },
-  { id: 6, year: '2022', title: 'Loud House', description: 'Loud House is a smart home music control app that lets users manage speaker playback seamlessly.', link: '#', image: 'src/assets/imgs/covers/Sweet Rush Cover.png' }
+  { id: 5, year: '2022', title: 'Sweet Rush', description: 'A delivery app specializing in sweets, designed for a seamless e-commerce experience.', link: '#', image: 'src/assets/imgs/covers/Sweet Rush Cover.gif' },
+  { id: 6, year: '2022', title: 'Loud House', description: 'Loud House is a smart home music control app that lets users manage speaker playback seamlessly.', link: '#', image: 'src/assets/imgs/covers/Loud House Cover.gif' }
 ]
 </script>
 
