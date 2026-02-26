@@ -1,6 +1,9 @@
 <template>
   <header class="app-header">
-    <div class="logo"><a href="#" @click.prevent="$emit('navigate', 0)"><img src="" alt="Logo" /></a></div>
+    <div class="logo">
+      <a class="logo-name" href="#" @click.prevent="$emit('navigate', 0)">Rotem Sharaby</a>
+      <a class="logo-title"href="#" @click.prevent="$emit('navigate', 0)">UX / UI Gaming | Motion Design</a>
+    </div>
     <nav class="navigation">
       <a href="#" class="nav-link" :class="{ active: currentIndex === 0 }" @click.prevent="$emit('navigate', 0)">UX / UI Projects</a>
       <a href="#" class="nav-link" :class="{ active: currentIndex === 1 }" @click.prevent="$emit('navigate', 1)">Motion Projects</a>
@@ -21,11 +24,26 @@ defineProps({ currentIndex: { type: Number, default: 0 } })
 .app-header {
   display: flex;
   align-items: center;
-  padding-inline: 5rem;
-  padding-block: 2rem;
+  padding-inline: 4.25rem;
+  padding-block: 1rem;
 
   .logo {
-    width: 200px;
+    width: 15.44rem;
+
+    .logo-name {
+      display: block;
+      font-size: 1.125rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    .logo-title{
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
   }
 
   .navigation {
@@ -38,24 +56,15 @@ defineProps({ currentIndex: { type: Number, default: 0 } })
     .nav-link {
       position: relative;
       padding: 1rem;
-      color: var(--prime-text);
       text-decoration: none;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
 
-      &::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 5px;
-        transform: translateX(-50%);
-        width: 0;
-        height: 1px;
-        background: currentColor;
-        transition: width 0.2s ease;
-      }
-
-      &:hover::after,
-      &.active::after {
-        width: 90%;
+      &:hover, &.active{
+        color: var(--sec-bg);
+        font-weight: 800;
       }
     }
   }

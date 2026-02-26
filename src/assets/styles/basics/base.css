@@ -10,8 +10,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--sec-bg);
-  color: var(--prime-text);
+  background: var(--prime-bg);
+  color: var(--light-text);
   font-family: 'Poppins', sans-serif;
 }
 
