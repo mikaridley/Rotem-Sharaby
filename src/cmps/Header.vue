@@ -5,9 +5,9 @@
       <a class="logo-title"href="#" @click.prevent="$emit('navigate', 0)">UX / UI Gaming | Motion Design</a>
     </div>
     <nav class="navigation">
-      <a href="#" class="nav-link" :class="{ active: currentIndex === 0 }" @click.prevent="$emit('navigate', 0)">UX / UI Projects</a>
-      <a href="#" class="nav-link" :class="{ active: currentIndex === 1 }" @click.prevent="$emit('navigate', 1)">Motion Projects</a>
-      <a href="#" class="nav-link" :class="{ active: currentIndex === 2 }" @click.prevent="$emit('navigate', 2)">About</a>
+      <a href="#" class="nav-link" :class="{ active: currentIndex === 1 }" @click.prevent="$emit('navigate', 1)">UX / UI Projects</a>
+      <a href="#" class="nav-link" :class="{ active: currentIndex === 2 }" @click.prevent="$emit('navigate', 2)">Motion Projects</a>
+      <a href="#" class="nav-link" :class="{ active: currentIndex === 3 }" @click.prevent="$emit('navigate', 3)">About</a>
     </nav>
     <div class="social-links">
       <a href="https://wa.me/972546000000" target="_blank"><img src="../assets/imgs/social/Whatsapp.png" alt="Whatsapp" /></a>

@@ -12,14 +12,15 @@
 import { ref, computed } from 'vue'
 import Header from './cmps/Header.vue'
 import Footer from './cmps/Footer.vue'
+import HomePage from './pages/HomePage.vue'
 import UxUiProjectsPage from './pages/UxUiProjectsPage.vue'
 import MotionProjectsPage from './pages/MotionProjectsPage.vue'
 import AboutPage from './pages/AboutPage.vue'
 
 const siteName = ref("Rotem Sharaby")
-const pages = ref(["UX / UI Projects","Motion Projects","About"])
+const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
 const currentPageIndex = ref(0)
-const currentPageComponent = computed(() => [UxUiProjectsPage, MotionProjectsPage, AboutPage][currentPageIndex.value])
+const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage][currentPageIndex.value])
 </script>
 
 <style scoped>
