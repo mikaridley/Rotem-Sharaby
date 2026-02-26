@@ -116,7 +116,6 @@ const sections = [
   min-height: 100vh;
   padding-inline: 2rem;
   padding-block: 5rem 4rem;
-  background-color: #1a1628;
   background-size: 220px 140px;
 
   .page-title {
