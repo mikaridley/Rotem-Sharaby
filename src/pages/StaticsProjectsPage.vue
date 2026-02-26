@@ -6,31 +6,37 @@
       <h2 class="section-heading">{{ section.title }}</h2>
       <div class="statics-grid">
         <template v-if="section.id === 'particula' && particulaImages.length">
-          <div
+          <button
             v-for="(src, i) in particulaImages"
             :key="i"
+            type="button"
             class="statics-item"
+            @click="openImage(src, `Particula ${i + 1}`)"
           >
             <img :src="src" :alt="`Particula ${i + 1}`" class="statics-img" />
-          </div>
+          </button>
         </template>
         <template v-else-if="section.id === 'pandazzz' && pandazzzImages.length">
-          <div
+          <button
             v-for="(src, i) in pandazzzImages"
             :key="i"
+            type="button"
             class="statics-item"
+            @click="openImage(src, `PandaZZZ ${i + 1}`)"
           >
             <img :src="src" :alt="`PandaZZZ ${i + 1}`" class="statics-img" />
-          </div>
+          </button>
         </template>
         <template v-else-if="section.id === 'others' && othersImages.length">
-          <div
+          <button
             v-for="(src, i) in othersImages"
             :key="i"
+            type="button"
             class="statics-item"
+            @click="openImage(src, `Others ${i + 1}`)"
           >
             <img :src="src" :alt="`Others ${i + 1}`" class="statics-img" />
-          </div>
+          </button>
         </template>
         <template v-else>
           <div
@@ -43,10 +49,31 @@
         </template>
       </div>
     </section>
+
+    <Teleport to="body">
+      <Transition name="modal">
+        <div
+          v-if="activeModalImage"
+          class="statics-modal-overlay"
+          @click.self="closeImage"
+        >
+          <div class="statics-modal-content">
+            <img
+              :src="activeModalImage.src"
+              :alt="activeModalImage.alt"
+              class="statics-modal-img"
+            />
+            <button type="button" class="statics-modal-close" aria-label="Close" @click="closeImage">×</button>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </section>
 </template>
 
 <script setup>
+import { ref, onUnmounted } from 'vue'
+
 const particulaModules = import.meta.glob('../assets/imgs/particula/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
 const particulaImages = Object.keys(particulaModules).sort().map(path => particulaModules[path])
 
@@ -55,6 +82,28 @@ const pandazzzImages = Object.keys(pandazzzModules).sort().map(path => pandazzzM
 
 const othersModules = import.meta.glob('../assets/imgs/others/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
 const othersImages = Object.keys(othersModules).sort().map(path => othersModules[path])
+
+const activeModalImage = ref(null)
+
+function openImage(src, alt) {
+  activeModalImage.value = { src, alt }
+}
+
+function closeImage() {
+  activeModalImage.value = null
+}
+
+function onKeydown(e) {
+  if (e.key === 'Escape') closeImage()
+}
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', onKeydown)
+})
+
+if (typeof document !== 'undefined') {
+  document.addEventListener('keydown', onKeydown)
+}
 
 const sections = [
   { id: 'particula', title: 'Particula' },
@@ -118,6 +167,22 @@ const sections = [
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       border: 1px solid rgba(0, 0, 0, 0.08);
       overflow: hidden;
+      transition: transform 0.25s ease;
+    }
+
+    .statics-item {
+      padding: 0;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: none;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .statics-placeholder:hover {
+      transform: scale(1.05);
     }
 
     .statics-placeholder {
@@ -131,5 +196,62 @@ const sections = [
       display: block;
     }
   }
+}
+</style>
+
+<style>
+.statics-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.statics-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.statics-modal-img {
+  max-width: 45vw;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  background: #000;
+}
+
+.statics-modal-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.statics-modal-close:hover {
+  opacity: 0.8;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.2s ease;
+}
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
 }
 </style>
