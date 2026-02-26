@@ -12,10 +12,11 @@
       >
         <video
           :src="video.src"
-          preload="metadata"
+          preload="auto"
           muted
           playsinline
           class="video-thumbnail"
+          @loadeddata="onThumbLoaded"
         />
         <span class="video-play-icon" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
@@ -75,6 +76,13 @@ function closeVideo() {
     modalVideoRef.value.pause()
   }
   activeIndex.value = null
+}
+
+function onThumbLoaded(e) {
+  const video = e.target
+  if (video.duration >= 1) {
+    video.currentTime = 1
+  }
 }
 
 watch(activeIndex, (val) => {
