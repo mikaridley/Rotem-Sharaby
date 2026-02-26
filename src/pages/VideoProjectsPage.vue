@@ -76,6 +76,7 @@ watch(activeIndex, (val) => {
   nextTick(() => {
     const video = modalVideoRef.value
     if (video) {
+      video.volume = 0.1
       video.load()
       video.play().catch(() => {})
     }
@@ -134,6 +135,7 @@ if (typeof document !== 'undefined') {
         height: 100%;
         object-fit: cover;
         display: block;
+
       }
     }
 
