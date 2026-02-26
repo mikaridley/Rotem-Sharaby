@@ -16,12 +16,13 @@ import HomePage from './pages/HomePage.vue'
 import UxUiProjectsPage from './pages/UxUiProjectsPage.vue'
 import MotionProjectsPage from './pages/MotionProjectsPage.vue'
 import AboutPage from './pages/AboutPage.vue'
+import VideoProjectsPage from './pages/VideoProjectsPage.vue'
 
 const siteName = ref("Rotem Sharaby")
 const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
 const currentPageIndex = ref(0)
 const scrollingToAbout = ref(false)
-const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage][currentPageIndex.value])
+const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage][currentPageIndex.value])
 
 function goToPage(index) {
   if (index === 3) {

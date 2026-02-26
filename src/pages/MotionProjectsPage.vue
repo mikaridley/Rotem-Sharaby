@@ -11,7 +11,13 @@
           <span class="project-year">{{ project.year }}</span>
           <h2 class="project-title">{{ project.title }}</h2>
           <p class="project-description">{{ project.description }}</p>
-          <a :href="project.link" class="project-btn">View Project</a>
+          <a
+            v-if="project.navigateTo !== undefined"
+            href="#"
+            class="project-btn"
+            @click.prevent="$emit('navigate', project.navigateTo)"
+          >View Project</a>
+          <a v-else :href="project.link" class="project-btn">View Project</a>
         </div>
       </article>
     </div>
@@ -19,8 +25,10 @@
 </template>
 
 <script setup>
+defineEmits(['navigate'])
+
 const projects = [
-  { id: 1, year: '2021-2025', title: 'Videos Projects', description: 'A collection of video projects I created from concept to final execution.', link: '#', image: 'src/assets/imgs/covers/Videos Projects - Cover.png' },
+  { id: 1, year: '2021-2025', title: 'Videos Projects', description: 'A collection of video projects I created from concept to final execution.', link: '#', navigateTo: 4, image: 'src/assets/imgs/covers/Videos Projects - Cover.png' },
   { id: 2, year: '2021-2025', title: 'Statics Projects', description: 'A collection of high-performing static ads designed to capture attention and drive engagement.', link: '#', image: 'src/assets/imgs/covers/Statics Projects - Cover.png' },
   { id: 3, year: '2021-2025', title: 'UGC Projects', description: 'This UGC collection features ads designed to build trust and boost engagement.', link: '', image: 'src/assets/imgs/covers/UGC Projects - Cover.png' },
 ]
@@ -35,7 +43,7 @@ const projects = [
   padding-bottom: 4rem;
 
   .page-title {
-    margin:7.19rem 6rem;
+    margin:7.19rem 6.6rem;
     font-family: 'Insomnia', sans-serif;
     font-size: 3rem;
     font-style: normal;
