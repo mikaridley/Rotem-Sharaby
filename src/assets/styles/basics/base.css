@@ -118,5 +118,5 @@ button {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--dark-grey);
+  background-color: var(--light-text);
 }
