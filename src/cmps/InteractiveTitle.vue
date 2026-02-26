@@ -52,29 +52,32 @@ let timer = null
 
 const n = computed(() => props.items.length)
 
-// Duplicate items for seamless loop
-const stripItems = computed(() => [...props.items, ...props.items])
+// Three copies so there's always a faded item on left and right (loop never shows empty sides)
+const stripItems = computed(() => [...props.items, ...props.items, ...props.items])
 
-// Which logical index (0..n-1) is at track center (strip is flex-centered, so account for strip position)
+// Which logical index (0..n-1) is at track center
 const centerLogicalIndex = computed(() => {
   const w = itemWidth.value
   const sw = stripWidth.value
   if (w <= 0 || sw <= 0) return 0
-  const raw = Math.round((sw / 2 - w / 2 - stripOffset.value) / w)
+  const stripIndexAtCenter = (sw / 2 - w / 2 - stripOffset.value) / w
+  const raw = Math.round(stripIndexAtCenter)
   return ((raw % n.value) + n.value) % n.value
 })
 
 function isCenterIndex(i) {
-  return i === centerLogicalIndex.value || i === centerLogicalIndex.value + n.value
+  return (i % n.value) === centerLogicalIndex.value
 }
 
 function advance() {
   const step = itemWidth.value
   const totalWidth = n.value * step
-  const initialOffset = stripWidth.value / 2 - itemWidth.value / 2
+  // Start with second copy's first item centered so we see first copy's last on left
+  const initialOffset = stripWidth.value / 2 - n.value * itemWidth.value - itemWidth.value / 2
 
   stripOffset.value -= step
 
+  // After n steps we've scrolled one full set; reset to same visual (second copy's first centered)
   if (stripOffset.value <= initialOffset - totalWidth + 5) {
     noTransition.value = true
     stripOffset.value = initialOffset
@@ -100,8 +103,8 @@ onMounted(() => {
       itemWidth.value = rect.width + gap
     }
     stripWidth.value = stripItems.value.length * itemWidth.value
-    // So first item is at track center: (trackW-stripW)/2 + 0 + itemW/2 + stripOffset = trackW/2 => stripOffset = stripW/2 - itemW/2
-    stripOffset.value = stripWidth.value / 2 - itemWidth.value / 2
+    // Second copy's first item (index n) centered => last item of first copy visible on left
+    stripOffset.value = stripWidth.value / 2 - n.value * itemWidth.value - itemWidth.value / 2
   })
   timer = setInterval(advance, props.intervalMs)
 })
