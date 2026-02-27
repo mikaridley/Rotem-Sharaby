@@ -7,16 +7,25 @@
       :alt="`Aether ${i + 1}`"
       class="aether-img"
     />
+    <video
+      :src="aetherVideoSrc"
+      class="aether-end-video"
+      controls
+      playsinline
+      aria-label="Aether video"
+    />
   </section>
 </template>
 
 <script setup>
 const aetherModules = import.meta.glob('../assets/imgs/aether/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
 const aetherImages = Object.keys(aetherModules).sort().map(path => aetherModules[path])
+const aetherVideoSrc = new URL('../assets/imgs/aether/5.mov', import.meta.url).href
 </script>
 
 <style scoped>
 .aether-page {
+  position: relative;
   width: 100%;
   min-height: 100vh;
   padding: 0;
@@ -30,5 +39,14 @@ const aetherImages = Object.keys(aetherModules).sort().map(path => aetherModules
   vertical-align: top;
   margin: 0;
   padding: 0;
+}
+
+.aether-end-video {
+  position: absolute;
+  bottom: 955px;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 </style>

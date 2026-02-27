@@ -12,9 +12,10 @@
         :src="item.src"
         class="bow-video"
         autoplay
-        muted
         playsinline
         loop
+        controls
+        @loadedmetadata="onVideoLoaded"
       />
     </template>
   </section>
@@ -42,6 +43,10 @@ const videoItems = Object.entries(videoModules).map(([path, src]) => ({
 }))
 
 const mediaItems = [...imageItems, ...videoItems].sort((a, b) => a.order - b.order)
+
+function onVideoLoaded(ev) {
+  ev.target.volume = 0.1
+}
 </script>
 
 <style scoped>
