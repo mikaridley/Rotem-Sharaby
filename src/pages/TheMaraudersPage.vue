@@ -25,10 +25,21 @@
       alt="The Marauders 4"
       class="the-marauders-img"
     />
+
+    <button class="view-more-projects" @click="$emit('navigate', 1)"></button>
+    <a
+      href="https://wa.me/972526269621"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="contact-me"
+      aria-label="Contact me on WhatsApp"
+    ></a>
   </section>
 </template>
 
 <script setup>
+defineEmits(['navigate'])
+
 const maraudersImage1Src = new URL('../assets/imgs/the marauders/1.png', import.meta.url).href
 const maraudersImage2Src = new URL('../assets/imgs/the marauders/2.png', import.meta.url).href
 const maraudersVideoSrc = new URL('../assets/imgs/the marauders/3.mp4', import.meta.url).href
@@ -68,7 +79,7 @@ const maraudersImage4Src = new URL('../assets/imgs/the marauders/4.png', import.
 
 .the-marauders-video {
   position: absolute;
-  bottom: 125px;
+  bottom: 250px;
   left: 50%;
   transform: translateX(-50%);
   display: block;
@@ -76,5 +87,23 @@ const maraudersImage4Src = new URL('../assets/imgs/the marauders/4.png', import.
   height: auto;
   margin: 0;
   padding: 0;
+}
+
+.view-more-projects{
+  position: absolute;
+  bottom:-34545px;
+  right:110px;
+  width:920px;
+  height:160px;
+  background-color: transparent
+}
+
+.contact-me{
+  position: absolute;
+  bottom:-34545px;
+  left:110px;
+  width:695px;
+  height:160px;
+  background-color: transparent
 }
 </style>

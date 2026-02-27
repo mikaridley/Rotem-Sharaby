@@ -65,7 +65,7 @@ async function handleCopy(ev) {
   .navigation {
     display: flex;
     align-items: center;
-    gap: 2.3rem;
+    gap: 0.8rem;
     margin-left: auto;
     margin-right: 4.12rem;
 

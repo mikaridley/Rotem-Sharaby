@@ -24,11 +24,13 @@
     <div class="showreel">
       <h1 class="showreel-title">showreel</h1>
       <video
+        ref="showreelVideo"
         class="showreel-video"
         :src="homeReelSrc"
         controls
         playsinline
         aria-label="Home reel"
+        @loadedmetadata="setStartVolume"
       />
     </div>
 
@@ -48,10 +50,20 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import InteractiveTitle from '../cmps/InteractiveTitle.vue'
 defineEmits(['navigate'])
 
+const showreelVideo = ref(null)
 const homeReelSrc = new URL('../assets/videos/Home Reel.mp4', import.meta.url).href
+
+function setStartVolume() {
+  if (showreelVideo.value) showreelVideo.value.volume = 0.1
+}
+
+onMounted(() => {
+  if (showreelVideo.value) showreelVideo.value.volume = 0.1
+})
 
 // Software logos from src/assets/imgs/sotfware – adjust filenames to match your folder
 const softwareLogos = [
@@ -196,6 +208,7 @@ const softwareLogos = [
 
     .about-me-name {
       color: #B589EA;
+      font-weight: 600;
     }
 
     .about-me-text {
