@@ -4,13 +4,13 @@
       <h2 class="footer-title">Contact me:</h2>
       <div class="footer-social">
         <a href="https://wa.me/972526269621" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-          <img src="../assets/imgs/social/Whatsapp.svg" alt="WhatsApp" />
+          <img :src="whatsappIcon" alt="WhatsApp" />
         </a>
         <a href="#" class="mail-link" rel="noopener noreferrer" aria-label="Copy email" @click.prevent="handleCopy">
-          <img src="../assets/imgs/social/Gmail.svg" alt="Gmail" />
+          <img :src="gmailIcon" alt="Gmail" />
         </a>
         <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <img src="../assets/imgs/social/Linkedin.png" alt="LinkedIn" />
+          <img :src="linkedinIcon" alt="LinkedIn" />
         </a>
       </div>
     </div>
@@ -22,6 +22,10 @@ import { inject } from 'vue'
 
 const email = 'sharabyrotem@gmail.com'
 const showSuccessMsg = inject('showSuccessMsg')
+
+const whatsappIcon = new URL('../assets/imgs/social/Whatsapp.svg', import.meta.url).href
+const gmailIcon = new URL('../assets/imgs/social/Gmail.svg', import.meta.url).href
+const linkedinIcon = new URL('../assets/imgs/social/LinkedIn.png', import.meta.url).href
 
 async function handleCopy(ev) {
   ev.preventDefault()

@@ -10,9 +10,9 @@
       <a href="#" class="nav-link" :class="{ active: currentIndex === 3 }" @click.prevent="$emit('navigate', 3)">About</a>
     </nav>
     <div class="social-links">
-      <a href="https://wa.me/972526269621" target="_blank"><img src="../assets/imgs/social/Whatsapp.svg" alt="Whatsapp" /></a>
-      <a href="#" class="mail-link" aria-label="Copy email" @click.prevent="handleCopy"><img src="../assets/imgs/social/Gmail.svg" alt="Gmail" /></a>
-      <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank"><img src="../assets/imgs/social/Linkedin.png" alt="Linkedin" /></a>
+      <a href="https://wa.me/972526269621" target="_blank"><img :src="whatsappIcon" alt="Whatsapp" /></a>
+      <a href="#" class="mail-link" aria-label="Copy email" @click.prevent="handleCopy"><img :src="gmailIcon" alt="Gmail" /></a>
+      <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank"><img :src="linkedinIcon" alt="Linkedin" /></a>
     </div>
   </header>
 </template>
@@ -24,6 +24,10 @@ defineProps({ currentIndex: { type: Number, default: 0 } })
 
 const email = 'sharabyrotem@gmail.com'
 const showSuccessMsg = inject('showSuccessMsg')
+
+const whatsappIcon = new URL('../assets/imgs/social/Whatsapp.svg', import.meta.url).href
+const gmailIcon = new URL('../assets/imgs/social/Gmail.svg', import.meta.url).href
+const linkedinIcon = new URL('../assets/imgs/social/LinkedIn.png', import.meta.url).href
 
 async function handleCopy(ev) {
   ev.preventDefault()
