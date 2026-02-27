@@ -109,6 +109,10 @@ watch(currentPageIndex, (newVal) => {
   grid-column: 1 / -1;
 }
 
+.main {
+  padding-top: 4.5rem;
+}
+
 :first-child,:last-child {
   grid-column: 1/-1;
 }

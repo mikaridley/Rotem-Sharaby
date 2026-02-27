@@ -37,11 +37,16 @@ async function handleCopy(ev) {
 </script>
 <style scoped>
 .app-header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
   display: flex;
   align-items: center;
   padding-inline: 4.25rem;
   padding-block: 1rem;
+  background: var(--prime-bg);
 
   .logo {
     width: 15.44rem;
