@@ -22,7 +22,7 @@ import { inject } from 'vue'
 defineEmits(['navigate'])
 defineProps({ currentIndex: { type: Number, default: 0 } })
 
-const email = 'rotem1203@gmail.com'
+const email = 'sharabyrotem@gmail.com'
 const showSuccessMsg = inject('showSuccessMsg')
 
 async function handleCopy(ev) {

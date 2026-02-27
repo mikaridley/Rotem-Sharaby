@@ -20,7 +20,7 @@
 <script setup>
 import { inject } from 'vue'
 
-const email = 'rotem1203@gmail.com'
+const email = 'sharabyrotem@gmail.com'
 const showSuccessMsg = inject('showSuccessMsg')
 
 async function handleCopy(ev) {
