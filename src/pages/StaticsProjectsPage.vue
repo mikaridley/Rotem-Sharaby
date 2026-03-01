@@ -75,13 +75,13 @@
 import { ref, onUnmounted } from 'vue'
 
 const particulaModules = import.meta.glob('../assets/imgs/particula/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
-const particulaImages = Object.keys(particulaModules).sort().map(path => particulaModules[path].default)
+const particulaImages = Object.keys(particulaModules).sort().map(path => particulaModules[path]?.default ?? particulaModules[path])
 
 const pandazzzModules = import.meta.glob('../assets/imgs/pandazzz/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
-const pandazzzImages = Object.keys(pandazzzModules).sort().map(path => pandazzzModules[path].default)
+const pandazzzImages = Object.keys(pandazzzModules).sort().map(path => pandazzzModules[path]?.default ?? pandazzzModules[path])
 
 const othersModules = import.meta.glob('../assets/imgs/others/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
-const othersImages = Object.keys(othersModules).sort().map(path => othersModules[path].default)
+const othersImages = Object.keys(othersModules).sort().map(path => othersModules[path]?.default ?? othersModules[path])
 
 const activeModalImage = ref(null)
 

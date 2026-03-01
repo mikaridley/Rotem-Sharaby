@@ -32,12 +32,12 @@ function getOrder(path) {
 
 const imageItems = Object.entries(imageModules).map(([path, mod]) => ({
   type: 'image',
-  src: mod.default,
+  src: mod?.default ?? mod,
   order: getOrder(path)
 }))
 const videoItems = Object.entries(videoModules).map(([path, mod]) => ({
   type: 'video',
-  src: mod.default,
+  src: mod?.default ?? mod,
   order: getOrder(path)
 }))
 
