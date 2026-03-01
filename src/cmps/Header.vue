@@ -26,7 +26,7 @@ const showSuccessMsg = inject('showSuccessMsg')
 
 const whatsappIcon = new URL('../assets/imgs/social/Whatsapp.svg', import.meta.url).href
 const gmailIcon = new URL('../assets/imgs/social/Gmail.svg', import.meta.url).href
-const linkedinIcon = new URL('../assets/imgs/social/LinkedIn.png', import.meta.url).href
+const linkedinIcon = new URL('../assets/imgs/social/Linkedin.svg', import.meta.url).href
 
 async function handleCopy(ev) {
   ev.preventDefault()
@@ -102,7 +102,7 @@ async function handleCopy(ev) {
     gap:1rem;
 
     a{
-      width:2.5rem ;
+      width:2rem ;
     }
   }
 
