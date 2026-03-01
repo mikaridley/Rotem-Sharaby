@@ -44,7 +44,7 @@
         <p class="about-me-text">Passionate about pushing creative boundaries, I love collaborating with teams to bring unique ideas to life.</p>
         <p class="about-me-text">If you'd like to connect, feel free to reach out.</p>
       </div>
-      <a href="#" class="project-btn home-page-btn" @click.prevent="$emit('navigate', 1)">Download CV</a>
+      <a :href="cvDownloadUrl" class="project-btn home-page-btn" target="_blank" rel="noopener noreferrer">Download CV</a>
     </div>
   </section>
 </template>
@@ -56,6 +56,7 @@ defineEmits(['navigate'])
 
 const showreelVideo = ref(null)
 const homeReelSrc = new URL('../assets/videos/Home Reel.mp4', import.meta.url).href
+const cvDownloadUrl = new URL('../assets/files/Rotem_Sharaby_Designer_Resume_2026.pdf', import.meta.url).href
 
 function setStartVolume() {
   if (showreelVideo.value) showreelVideo.value.volume = 0.1
