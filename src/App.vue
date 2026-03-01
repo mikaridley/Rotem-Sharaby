@@ -2,9 +2,7 @@
   <div class="app">
     <Header :site-name="siteName" :pages="pages" :current-index="headerNavIndex" />
     <main class="main" :class="{ 'main-full-width': isFullWidthPage }">
-      <router-view v-slot="{ Component }">
-        <component :is="Component" />
-      </router-view>
+      <router-view />
     </main>
     <Footer/>
     <Transition name="toast">

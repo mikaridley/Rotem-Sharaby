@@ -14,7 +14,6 @@ import LoudHousePage from '../pages/LoudHousePage.vue'
 
 const routes = [
   { path: '/', name: 'home', component: HomePage },
-  { path: '', redirect: '/' },
   { path: '/ux-ui', name: 'ux-ui', component: UxUiProjectsPage },
   { path: '/motion', name: 'motion', component: MotionProjectsPage },
   { path: '/about', name: 'about', component: HomePage, meta: { scrollToAbout: true } },
@@ -26,8 +25,7 @@ const routes = [
   { path: '/battle-of-wits', name: 'battle-of-wits', component: BattleOfWitsPage },
   { path: '/kindred', name: 'kindred', component: KindredPage },
   { path: '/sweet-rush', name: 'sweet-rush', component: SweetRushPage },
-  { path: '/loud-house', name: 'loud-house', component: LoudHousePage },
-  { path: '/:pathMatch(.*)*', redirect: '/' }
+  { path: '/loud-house', name: 'loud-house', component: LoudHousePage }
 ]
 
 const router = createRouter({
