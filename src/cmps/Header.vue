@@ -75,7 +75,7 @@ async function handleCopy(ev) {
     align-items: center;
     gap: 0.8rem;
     margin-left: auto;
-    margin-right: 4.12rem;
+    margin-right: 2.5rem;
 
     .nav-link {
       padding: 1rem;
