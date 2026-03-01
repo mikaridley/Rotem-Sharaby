@@ -236,7 +236,7 @@ const sections = [
 }
 
 .statics-modal-img {
-  max-width: 45vw;
+  max-width: 35vw;
   width: auto;
   height: auto;
   object-fit: contain;
