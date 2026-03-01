@@ -22,8 +22,8 @@
 </template>
 
 <script setup>
-const imageModules = import.meta.glob('../assets/imgs/battle of wits/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
-const videoModules = import.meta.glob('../assets/imgs/battle of wits/*.mov', { eager: true, as: 'url' })
+const imageModules = import.meta.glob('../assets/imgs/battle of wits/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
+const videoModules = import.meta.glob('../assets/imgs/battle of wits/*.mov', { eager: true, query: '?url', import: 'default' })
 
 function getOrder(path) {
   const name = path.replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '')
@@ -31,14 +31,14 @@ function getOrder(path) {
   return isNaN(num) ? 999 : num
 }
 
-const imageItems = Object.entries(imageModules).map(([path, src]) => ({
+const imageItems = Object.entries(imageModules).map(([path, mod]) => ({
   type: 'image',
-  src,
+  src: mod.default,
   order: getOrder(path)
 }))
-const videoItems = Object.entries(videoModules).map(([path, src]) => ({
+const videoItems = Object.entries(videoModules).map(([path, mod]) => ({
   type: 'video',
-  src,
+  src: mod.default,
   order: getOrder(path)
 }))
 

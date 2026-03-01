@@ -63,6 +63,7 @@
               :alt="activeModalImage.alt"
               class="statics-modal-img"
             />
+            <button type="button" class="statics-modal-close" aria-label="Close" @click="closeImage">×</button>
           </div>
         </div>
       </Transition>
@@ -73,14 +74,14 @@
 <script setup>
 import { ref, onUnmounted } from 'vue'
 
-const particulaModules = import.meta.glob('../assets/imgs/particula/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
-const particulaImages = Object.keys(particulaModules).sort().map(path => particulaModules[path])
+const particulaModules = import.meta.glob('../assets/imgs/particula/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
+const particulaImages = Object.keys(particulaModules).sort().map(path => particulaModules[path].default)
 
-const pandazzzModules = import.meta.glob('../assets/imgs/pandazzz/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
-const pandazzzImages = Object.keys(pandazzzModules).sort().map(path => pandazzzModules[path])
+const pandazzzModules = import.meta.glob('../assets/imgs/pandazzz/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
+const pandazzzImages = Object.keys(pandazzzModules).sort().map(path => pandazzzModules[path].default)
 
-const othersModules = import.meta.glob('../assets/imgs/others/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
-const othersImages = Object.keys(othersModules).sort().map(path => othersModules[path])
+const othersModules = import.meta.glob('../assets/imgs/others/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
+const othersImages = Object.keys(othersModules).sort().map(path => othersModules[path].default)
 
 const activeModalImage = ref(null)
 
@@ -213,6 +214,25 @@ const sections = [
   position: relative;
   max-width: 85vw;
   max-height: 85vh;
+}
+
+.statics-modal-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.statics-modal-close:hover {
+  opacity: 0.8;
 }
 
 .statics-modal-img {

@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-const aetherModules = import.meta.glob('../assets/imgs/aether/*.{png,jpg,jpeg,webp,gif}', { eager: true, as: 'url' })
-const aetherImages = Object.keys(aetherModules).sort().map(path => aetherModules[path])
+const aetherModules = import.meta.glob('../assets/imgs/aether/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
+const aetherImages = Object.keys(aetherModules).sort().map(path => aetherModules[path].default)
 const aetherVideoSrc = new URL('../assets/imgs/aether/5.mov', import.meta.url).href
 </script>
 

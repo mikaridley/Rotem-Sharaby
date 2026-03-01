@@ -247,6 +247,7 @@ if (typeof document !== 'undefined') {
   padding: 0;
   border: none;
   background: transparent;
+  color: #fff;
   font-size: 2rem;
   line-height: 1;
   cursor: pointer;

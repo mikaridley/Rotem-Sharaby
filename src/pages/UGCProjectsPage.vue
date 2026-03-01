@@ -43,6 +43,7 @@
               class="ugc-modal-player"
               @ended="closeVideo"
             />
+            <button type="button" class="ugc-modal-close" aria-label="Close" @click="closeVideo">×</button>
           </div>
         </div>
       </Transition>
@@ -112,16 +113,6 @@ if (typeof document !== 'undefined') {
   min-height: 100vh;
   padding-inline: 2rem;
   padding-block: 5rem 4rem;
-  background-color: #1a1628;
-  background-image:
-    radial-gradient(1.5px 1.5px at 20px 30px, rgba(255,255,255,0.45), transparent),
-    radial-gradient(1px 1px at 60px 10px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1.5px 1.5px at 100px 60px, rgba(255,255,255,0.35), transparent),
-    radial-gradient(1px 1px at 15px 90px, rgba(255,255,255,0.5), transparent),
-    radial-gradient(1.5px 1.5px at 150px 25px, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 80px 110px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1.5px 1.5px at 180px 70px, rgba(255,255,255,0.35), transparent);
-  background-size: 220px 140px;
 
   .page-title {
     margin: 0 0 4rem 0;
@@ -215,6 +206,25 @@ if (typeof document !== 'undefined') {
   position: relative;
   max-width: 90vw;
   max-height: 90vh;
+}
+
+.ugc-modal-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ugc-modal-close:hover {
+  opacity: 0.8;
 }
 
 .ugc-modal-player {
