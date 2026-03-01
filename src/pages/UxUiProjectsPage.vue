@@ -25,10 +25,12 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['navigate'])
+import { inject } from 'vue'
+
+const navigateByIndex = inject('navigateByIndex')
 
 function goToProject(index) {
-  emit('navigate', index)
+  navigateByIndex(index)
 }
 
 const projects = [

@@ -7,8 +7,8 @@
     <div class="projects">
       <h2 class="projects-title">Choose your interest:</h2>
       <div class="projects-buttons">
-        <a href="#" class="project-btn home-page-btn" @click.prevent="$emit('navigate', 1)">UX / UI Projects</a>
-        <a href="#" class="project-btn home-page-btn" @click.prevent="$emit('navigate', 2)">Motion Projects</a>
+        <a href="#" class="project-btn home-page-btn" @click.prevent="navigateByIndex(1)">UX / UI Projects</a>
+        <a href="#" class="project-btn home-page-btn" @click.prevent="navigateByIndex(2)">Motion Projects</a>
       </div>
       <div class="softwares">
         <img
@@ -50,9 +50,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import InteractiveTitle from '../cmps/InteractiveTitle.vue'
-defineEmits(['navigate'])
+
+const navigateByIndex = inject('navigateByIndex')
 
 const showreelVideo = ref(null)
 const homeReelSrc = new URL('../assets/videos/Home Reel.mp4', import.meta.url).href

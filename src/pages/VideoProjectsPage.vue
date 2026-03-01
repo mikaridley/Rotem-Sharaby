@@ -56,7 +56,10 @@
 
 <script setup>
 import { ref, computed, watch, nextTick, onUnmounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
+const router = useRouter()
 const activeIndex = ref(null)
 const modalVideoRef = ref(null)
 
@@ -64,12 +67,22 @@ const videos = Array.from({ length: 11 }, (_, i) => ({
   src: new URL(`../assets/videos/videos projects/${i + 1}.mp4`, import.meta.url).href
 }))
 
+watch(() => route.params.videoIndex, (val) => {
+  if (val !== undefined && val !== null && val !== '') {
+    const i = parseInt(val, 10)
+    if (!isNaN(i) && i >= 0 && i < videos.length) activeIndex.value = i
+  } else {
+    activeIndex.value = null
+  }
+}, { immediate: true })
+
 const activeVideoSrc = computed(() =>
   activeIndex.value !== null ? videos[activeIndex.value].src : null
 )
 
 function openVideo(index) {
   activeIndex.value = index
+  router.replace({ name: 'video-projects', params: { videoIndex: String(index) } })
 }
 
 function closeVideo() {
@@ -77,6 +90,7 @@ function closeVideo() {
     modalVideoRef.value.pause()
   }
   activeIndex.value = null
+  router.replace({ name: 'video-projects' })
 }
 
 function onThumbLoaded(e) {

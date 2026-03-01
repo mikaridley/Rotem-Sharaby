@@ -1,13 +1,13 @@
 <template>
   <header class="app-header">
     <div class="logo">
-      <a class="logo-name" href="#" @click.prevent="$emit('navigate', 0)">Rotem Sharaby</a>
-      <a class="logo-title"href="#" @click.prevent="$emit('navigate', 0)">UX / UI Gaming | Motion Design</a>
+      <router-link to="/" class="logo-name">Rotem Sharaby</router-link>
+      <router-link to="/" class="logo-title">UX / UI Gaming | Motion Design</router-link>
     </div>
     <nav class="navigation">
-      <a href="#" class="nav-link" :class="{ active: currentIndex === 1 }" @click.prevent="$emit('navigate', 1)">UX / UI Projects</a>
-      <a href="#" class="nav-link" :class="{ active: currentIndex === 2 }" @click.prevent="$emit('navigate', 2)">Motion Projects</a>
-      <a href="#" class="nav-link" :class="{ active: currentIndex === 3 }" @click.prevent="$emit('navigate', 3)">About</a>
+      <router-link to="/ux-ui" class="nav-link" :class="{ active: currentIndex === 1 }">UX / UI Projects</router-link>
+      <router-link to="/motion" class="nav-link" :class="{ active: currentIndex === 2 }">Motion Projects</router-link>
+      <router-link to="/about" class="nav-link" :class="{ active: currentIndex === 3 }">About</router-link>
     </nav>
     <div class="social-links">
       <a href="https://wa.me/972526269621" target="_blank"><img :src="whatsappIcon" alt="Whatsapp" /></a>
@@ -19,7 +19,6 @@
 <script setup>
 import { inject } from 'vue'
 
-defineEmits(['navigate'])
 defineProps({ currentIndex: { type: Number, default: 0 } })
 
 const email = 'sharabyrotem@gmail.com'

@@ -1,8 +1,10 @@
 <template>
   <div class="app">
-    <Header :site-name="siteName" :pages="pages" :current-index="currentPageIndex" @navigate="goToPage" />
-    <main class="main" :class="{ 'main-full-width': currentPageIndex === 7 || currentPageIndex === 8 || currentPageIndex === 9 || currentPageIndex === 10 || currentPageIndex === 11 || currentPageIndex === 12 }">
-      <component :is="currentPageComponent" @navigate="onMainNavigate" />
+    <Header :site-name="siteName" :pages="pages" :current-index="headerNavIndex" />
+    <main class="main" :class="{ 'main-full-width': isFullWidthPage }">
+      <router-view v-slot="{ Component }">
+        <component :is="Component" />
+      </router-view>
     </main>
     <Footer/>
     <Transition name="toast">
@@ -15,29 +17,34 @@
 
 <script setup>
 import { ref, computed, watch, nextTick, provide } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import Header from './cmps/Header.vue'
 import Footer from './cmps/Footer.vue'
-import HomePage from './pages/HomePage.vue'
-import UxUiProjectsPage from './pages/UxUiProjectsPage.vue'
-import MotionProjectsPage from './pages/MotionProjectsPage.vue'
-import AboutPage from './pages/AboutPage.vue'
-import VideoProjectsPage from './pages/VideoProjectsPage.vue'
-import StaticsProjectsPage from './pages/StaticsProjectsPage.vue'
-import UGCProjectsPage from './pages/UGCProjectsPage.vue'
-import TheMaraudersPage from './pages/TheMaraudersPage.vue'
-import AetherPage from './pages/AetherPage.vue'
-import BattleOfWitsPage from './pages/BattleOfWitsPage.vue'
-import KindredPage from './pages/KindredPage.vue'
-import SweetRushPage from './pages/SweetRushPage.vue'
-import LoudHousePage from './pages/LoudHousePage.vue'
+
+const PATHS = ['/', '/ux-ui', '/motion', '/about', '/video-projects', '/statics', '/ugc', '/the-marauders', '/aether', '/battle-of-wits', '/kindred', '/sweet-rush', '/loud-house']
+
+const router = useRouter()
+const route = useRoute()
 
 const siteName = ref("Rotem Sharaby")
 const pages = ref(["UX / UI Projects", "Motion Projects", "About"])
-const currentPageIndex = ref(0)
 const scrollingToAbout = ref(false)
 const toastVisible = ref(false)
 const toastMessage = ref('')
 let toastTimeout = null
+
+const headerNavIndex = computed(() => {
+  const name = route.name
+  if (name === 'ux-ui') return 1
+  if (name === 'motion') return 2
+  if (name === 'about') return 3
+  return 0
+})
+
+const isFullWidthPage = computed(() => {
+  const name = route.name
+  return ['the-marauders', 'aether', 'battle-of-wits', 'kindred', 'sweet-rush', 'loud-house'].includes(name)
+})
 
 function showSuccessMsg(message) {
   toastMessage.value = message
@@ -49,49 +56,50 @@ function showSuccessMsg(message) {
   }, 2800)
 }
 
-provide('showSuccessMsg', showSuccessMsg)
-
-const currentPageComponent = computed(() => [HomePage, UxUiProjectsPage, MotionProjectsPage, AboutPage, VideoProjectsPage, StaticsProjectsPage, UGCProjectsPage, TheMaraudersPage, AetherPage, BattleOfWitsPage, KindredPage, SweetRushPage, LoudHousePage][currentPageIndex.value])
-
-function goToPage(index) {
+function navigateByIndex(index) {
   if (index === 3) {
-    scrollingToAbout.value = true
-    currentPageIndex.value = 0
-    nextTick(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' })
-      let attempts = 0
-      const scrollToAbout = () => {
-        const el = document.getElementById('about-me-title')
-        if (el) {
-          // Wait for layout to settle (e.g. showreel video height) before measuring
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              setTimeout(() => {
-                const y = el.getBoundingClientRect().top + window.scrollY
-                window.scrollTo({ top: y, left: 0, behavior: 'smooth' })
-                scrollingToAbout.value = false
-              }, 100)
-            })
-          })
-          return
-        }
-        if (++attempts < 40) requestAnimationFrame(scrollToAbout)
-        else scrollingToAbout.value = false
-      }
-      requestAnimationFrame(() => requestAnimationFrame(scrollToAbout))
-    })
+    router.push('/about')
   } else {
-    currentPageIndex.value = index
+    router.push(PATHS[index] ?? '/')
   }
 }
 
-function onMainNavigate(index) {
-  currentPageIndex.value = Number(index)
+function scrollToAboutSection() {
+  scrollingToAbout.value = true
+  nextTick(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+    let attempts = 0
+    const tryScroll = () => {
+      const el = document.getElementById('about-me-title')
+      if (el) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              const y = el.getBoundingClientRect().top + window.scrollY
+              window.scrollTo({ top: y, left: 0, behavior: 'smooth' })
+              scrollingToAbout.value = false
+            }, 100)
+          })
+        })
+        return
+      }
+      if (++attempts < 40) requestAnimationFrame(tryScroll)
+      else scrollingToAbout.value = false
+    }
+    requestAnimationFrame(() => requestAnimationFrame(tryScroll))
+  })
 }
 
-watch(currentPageIndex, (newVal) => {
+provide('showSuccessMsg', showSuccessMsg)
+provide('navigateByIndex', navigateByIndex)
+
+watch(() => route.path, (newPath, oldPath) => {
   if (!scrollingToAbout.value) window.scrollTo({ top: 0, behavior: 'instant' })
 })
+
+watch(() => route.meta.scrollToAbout, (scroll) => {
+  if (scroll) scrollToAboutSection()
+}, { immediate: true })
 </script>
 
 <style scoped>

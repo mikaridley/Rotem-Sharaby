@@ -26,7 +26,7 @@
       class="the-marauders-img"
     />
 
-    <button class="view-more-projects" @click="$emit('navigate', 1)"></button>
+    <button class="view-more-projects" @click="navigateByIndex(1)">View more projects</button>
     <a
       href="https://wa.me/972526269621"
       target="_blank"
@@ -38,7 +38,9 @@
 </template>
 
 <script setup>
-defineEmits(['navigate'])
+import { inject } from 'vue'
+
+const navigateByIndex = inject('navigateByIndex')
 
 const maraudersImage1Src = new URL('../assets/imgs/the marauders/1.png', import.meta.url).href
 const maraudersImage2Src = new URL('../assets/imgs/the marauders/2.png', import.meta.url).href
