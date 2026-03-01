@@ -33,6 +33,7 @@
         <div
           v-if="activeIndex !== null"
           class="video-modal-overlay"
+          :class="{ 'video-modal--large': activeIndex === 0 || activeIndex === 1 }"
           @click.self="closeVideo"
         >
           <div class="video-modal-content">
@@ -59,7 +60,7 @@ import { ref, computed, watch, nextTick, onUnmounted } from 'vue'
 const activeIndex = ref(null)
 const modalVideoRef = ref(null)
 
-const videos = Array.from({ length: 9 }, (_, i) => ({
+const videos = Array.from({ length: 11 }, (_, i) => ({
   src: new URL(`../assets/videos/videos projects/${i + 1}.mp4`, import.meta.url).href
 }))
 
@@ -202,22 +203,25 @@ if (typeof document !== 'undefined') {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  max-width:110rem ;
+  width:100vw;
 }
 
 .video-modal-content {
   position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 75vw;
+  max-height: 75vh;
 }
 
 .video-modal-player {
-  width: 110rem;
-  max-width: 45vw;
+  max-width: 30vw;
   object-fit: contain;
   display: block;
   border-radius: 8px;
   background: #000;
+}
+
+.video-modal--large .video-modal-player {
+  max-width: 45vw;
 }
 
 .video-modal-close {

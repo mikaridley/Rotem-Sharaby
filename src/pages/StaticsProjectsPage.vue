@@ -211,8 +211,8 @@ const sections = [
 
 .statics-modal-content {
   position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: 85vw;
+  max-height: 85vh;
 }
 
 .statics-modal-img {

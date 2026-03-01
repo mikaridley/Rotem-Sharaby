@@ -56,7 +56,7 @@ import { ref, computed, watch, nextTick, onUnmounted } from 'vue'
 const activeIndex = ref(null)
 const modalVideoRef = ref(null)
 
-const videos = Array.from({ length: 3 }, (_, i) => ({
+const videos = Array.from({ length: 8 }, (_, i) => ({
   src: new URL(`../assets/videos/ugc projects/${i + 1}.mp4`, import.meta.url).href
 }))
 
