@@ -1,5 +1,15 @@
 <template>
   <div class="app">
+    <div class="video-background" aria-hidden="true">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        :src="backgroundVideoSrc"
+        class="video-background__video"
+      />
+    </div>
     <Header :site-name="siteName" :pages="pages" :current-index="headerNavIndex" />
     <main class="main" :class="{ 'main-full-width': isFullWidthPage }">
       <router-view />
@@ -18,6 +28,8 @@ import { ref, computed, watch, nextTick, provide } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import Header from './cmps/Header.vue'
 import Footer from './cmps/Footer.vue'
+
+const backgroundVideoSrc = new URL('./assets/videos/background.mp4', import.meta.url).href
 
 const PATHS = ['/', '/ux-ui', '/motion', '/about', '/video-projects', '/statics', '/ugc', '/the-marauders', '/aether', '/battle-of-wits', '/kindred', '/sweet-rush', '/loud-house']
 
@@ -106,9 +118,27 @@ watch(() => route.meta.scrollToAbout, (scroll) => {
   grid-template-rows: auto 1fr auto;
   grid-template-columns: minmax(5rem, auto) minmax(0,1500px) minmax(5rem, auto);
   min-height: 100vh;
+  position: relative;
+  z-index: 0;
 
   > * {
   grid-column: 2;
+}
+
+.video-background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-background__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .main-full-width {
