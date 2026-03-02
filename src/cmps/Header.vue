@@ -127,4 +127,7 @@ async function handleCopy(ev) {
     pointer-events: none;
   }
 }
+
+@media (max-width: 1000px) {
+}
 </style>
