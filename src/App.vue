@@ -126,10 +126,11 @@ watch(() => route.meta.scrollToAbout, (scroll) => {
 }
 
 .video-background {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: -1;
   overflow: hidden;
 }
@@ -147,6 +148,7 @@ watch(() => route.meta.scrollToAbout, (scroll) => {
 
 .main {
   padding-top: 4.5rem;
+  min-height: calc(100vh - 12rem);
 }
 
 :first-child,:last-child {
