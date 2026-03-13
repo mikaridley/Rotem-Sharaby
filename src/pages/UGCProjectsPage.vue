@@ -18,9 +18,20 @@
           @loadeddata="onThumbLoaded"
         />
         <span class="ugc-play-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="30" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.9)" stroke-width="2"/>
-            <path d="M26 20v24l20-12z" fill="#fff"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            fill="none"
+          >
+            <circle
+              cx="32"
+              cy="32"
+              r="30"
+              fill="rgba(0,0,0,0.5)"
+              stroke="rgba(255,255,255,0.9)"
+              stroke-width="2"
+            />
+            <path d="M26 20v24l20-12z" fill="#fff" />
           </svg>
         </span>
       </button>
@@ -43,7 +54,14 @@
               class="ugc-modal-player"
               @ended="closeVideo"
             />
-            <button type="button" class="ugc-modal-close" aria-label="Close" @click="closeVideo">×</button>
+            <button
+              type="button"
+              class="ugc-modal-close"
+              aria-label="Close"
+              @click="closeVideo"
+            >
+              ×
+            </button>
           </div>
         </div>
       </Transition>
@@ -52,59 +70,60 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, nextTick, onUnmounted } from 'vue'
+import { ref, computed, watch, nextTick, onUnmounted } from "vue";
 
-const activeIndex = ref(null)
-const modalVideoRef = ref(null)
+const activeIndex = ref(null);
+const modalVideoRef = ref(null);
 
 const videos = Array.from({ length: 8 }, (_, i) => ({
-  src: new URL(`../assets/videos/ugc projects/${i + 1}.mp4`, import.meta.url).href
-}))
+  src: new URL(`../assets/videos/ugc projects/${i + 1}.mp4`, import.meta.url)
+    .href,
+}));
 
 const activeVideoSrc = computed(() =>
-  activeIndex.value !== null ? videos[activeIndex.value].src : null
-)
+  activeIndex.value !== null ? videos[activeIndex.value].src : null,
+);
 
 function openVideo(index) {
-  activeIndex.value = index
+  activeIndex.value = index;
 }
 
 function closeVideo() {
   if (modalVideoRef.value) {
-    modalVideoRef.value.pause()
+    modalVideoRef.value.pause();
   }
-  activeIndex.value = null
+  activeIndex.value = null;
 }
 
 function onThumbLoaded(e) {
-  const video = e.target
+  const video = e.target;
   if (video.duration >= 1) {
-    video.currentTime = 1
+    video.currentTime = 1;
   }
 }
 
 watch(activeIndex, (val) => {
-  if (val === null) return
+  if (val === null) return;
   nextTick(() => {
-    const video = modalVideoRef.value
+    const video = modalVideoRef.value;
     if (video) {
-      video.volume = 0.5
-      video.load()
-      video.play().catch(() => {})
+      video.volume = 0.5;
+      video.load();
+      video.play().catch(() => {});
     }
-  })
-})
+  });
+});
 
 function onKeydown(e) {
-  if (e.key === 'Escape') closeVideo()
+  if (e.key === "Escape") closeVideo();
 }
 
 onUnmounted(() => {
-  document.removeEventListener('keydown', onKeydown)
-})
+  document.removeEventListener("keydown", onKeydown);
+});
 
-if (typeof document !== 'undefined') {
-  document.addEventListener('keydown', onKeydown)
+if (typeof document !== "undefined") {
+  document.addEventListener("keydown", onKeydown);
 }
 </script>
 
@@ -116,7 +135,7 @@ if (typeof document !== 'undefined') {
 
   .page-title {
     margin: 0 0 4rem 0;
-    font-family: 'Insomnia', sans-serif;
+    font-family: "Insomnia", sans-serif;
     font-size: 3rem;
     font-style: normal;
     font-weight: 400;
@@ -182,9 +201,23 @@ if (typeof document !== 'undefined') {
     @media (max-width: 900px) {
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+}
 
-    @media (max-width: 520px) {
-      grid-template-columns: 1fr;
+@media (max-width: 900px) {
+  .ugc-projects-page {
+    padding-inline: 0.5rem;
+
+    .page-title {
+      margin: 0 0 3.3rem 0;
+      font-size: 2.5rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .ugc-grid {
+      gap: 0.5rem;
     }
   }
 }
