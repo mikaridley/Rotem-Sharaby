@@ -84,12 +84,14 @@ const maraudersImage4Src = new URL('../assets/imgs/the marauders/4.png', import.
 
 .the-marauders-video {
   position: absolute;
-  bottom: 250px;
+  /* Percentage so the video stays in the same spot relative to the image at any screen size */
+  bottom: 3%;
   left: 50%;
   transform: translateX(-50%);
   display: block;
   width: 95%;
   height: auto;
+  max-height: 50%; /* keep video inside the image area */
   margin: 0;
   padding: 0;
 }
