@@ -1,7 +1,7 @@
 /* Insomnia - served from public/fonts (absolute path works on Netlify) */
 @font-face {
   font-family: 'Insomnia';
-  src: url('/fonts/Insomnia/Insomnia.ttf') format('truetype');
+  src: url('/fonts/Insomnia/Insomnia.TTF') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
