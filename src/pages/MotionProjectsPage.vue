@@ -121,4 +121,65 @@ const projects = [
     }
   }
 }
+@media (max-width: 850px) {
+  .ux-ui-projects-page {
+    padding-inline: 0.7rem;
+
+    .page-title {
+      margin: 3.5rem 0rem;
+      font-size: 2.5rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-align: center;
+    }
+
+    .project-list {
+      gap: 2.5rem;
+
+      .project-card {
+        gap: 1.5rem;
+
+        .project-image-placeholder {
+          width: 8rem;
+          height: 8rem;
+
+          .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+          }
+        }
+
+        .project-content {
+          gap: 0.25rem;
+          margin-top: 0.5rem;
+
+          .project-year {
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 0.7925rem;
+          }
+
+          .project-title {
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 128.5%;
+          }
+
+          .project-description {
+            font-size: 0.8125rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 128.5%;
+            margin-bottom: 0rem;
+          }
+        }
+      }
+    }
+  }
+}
 </style>
