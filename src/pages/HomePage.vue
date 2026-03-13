@@ -195,4 +195,6 @@ const softwareLogos = [
     line-height: normal;
   }
 }
+
+@media (max-width: 1050px) {}
 </style>
