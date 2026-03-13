@@ -50,10 +50,12 @@ const maraudersImage4Src = new URL('../assets/imgs/the marauders/4.png', import.
 
 <style scoped>
 .the-marauders-page {
+  position: relative;
   width: 100%;
   min-height: 100vh;
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 .the-marauders-img {
@@ -71,6 +73,7 @@ const maraudersImage4Src = new URL('../assets/imgs/the marauders/4.png', import.
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .the-marauders-img2-wrap .the-marauders-img {
