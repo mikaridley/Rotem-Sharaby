@@ -366,7 +366,7 @@ watch(menuOpen, (open) => {
 
   .menu-drawer-link {
     display: block;
-    padding: 1.69rem 1.25rem;
+    padding: 1.69rem 2rem;
     margin-block-end: 2rem;
     color: var(--light-text);
     text-decoration: none;
@@ -385,10 +385,9 @@ watch(menuOpen, (open) => {
   }
 
   .menu-drawer-social {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    place-items: center;
-    gap: 1.25rem;
+    display: flex;
+    justify-content: center;
+    gap: 3.5rem;
     padding-block: 1.5rem;
     border-top: 1px solid rgba(198, 184, 228, 0.25);
 

@@ -84,10 +84,10 @@ const cvDownloadUrl = new URL(
   .main-imgs {
     grid-column: 1 / 7;
     display: grid;
-    grid-template-columns: repeat(2, max-content);
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     gap: 9rem;
-    width: 100%;
+    width: 95%;
 
     .avatar-img {
       width: 100%;
@@ -104,7 +104,7 @@ const cvDownloadUrl = new URL(
 
   .about-img {
     grid-column: 1 / 7;
-    margin-block: 4rem;
+    margin-block-start: 3.5rem;
     max-width: 87rem;
     width: 100%;
   }
@@ -115,6 +115,7 @@ const cvDownloadUrl = new URL(
     grid-row: 5;
     max-width: 54rem;
     width: 100%;
+    margin-block-start: 3.5rem;
   }
 
   .sec-imgs {
@@ -138,7 +139,8 @@ const cvDownloadUrl = new URL(
     display: grid;
     justify-items: center;
     row-gap: 1.75rem;
-    padding-block: 8rem;
+    margin-block: 8rem;
+    margin-block-start: 3.5rem;
 
     .resume-img {
       grid-column: 1;
@@ -201,7 +203,7 @@ const cvDownloadUrl = new URL(
     .main-imgs {
       grid-column: 1 / 3;
       grid-template-columns: repeat(1, 1fr);
-      gap: 1.3rem;
+      gap: 2rem;
       justify-items: center;
 
       .avatar-img,
@@ -214,6 +216,7 @@ const cvDownloadUrl = new URL(
     .about-img {
       grid-column: 1 / 3;
       place-items: center;
+      margin-block-start: 2rem;
 
       img{
         width: 100%;
@@ -223,6 +226,7 @@ const cvDownloadUrl = new URL(
     .experience-img {
       display: grid;
       place-items: center;
+      margin-block-start: 2rem;
 
       img{
         width: 100%;
@@ -237,7 +241,7 @@ const cvDownloadUrl = new URL(
       grid-template-columns: 1.095fr 1fr;
       grid-template-rows: repeat(1, 1fr);
       gap: 0.2rem;
-      margin-block-start: 2.7rem;
+      margin-block-start: 2rem;
       width:100%;
 
       img{
@@ -248,7 +252,7 @@ const cvDownloadUrl = new URL(
 
     .resume-container {
       row-gap: 0.2rem;
-      padding-block:4rem;
+      margin-block: 4rem;
 
       h2 {
         font-size: 1.125rem;
