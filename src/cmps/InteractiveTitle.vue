@@ -15,7 +15,7 @@
           :key="`${i}-${text}`"
           class="interactive-title-item"
           :class="{ 'is-center': isCenterIndex(i) }"
-          :ref="el => setItemEl(el, i)"
+          :ref="(el) => setItemEl(el, i)"
         >
           {{ text }}
         </span>
@@ -25,114 +25,130 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from "vue";
 
 const props = defineProps({
-  title: { type: String, default: '' },
+  title: { type: String, default: "" },
   items: {
     type: Array,
     default: () => [
-      'Motion Design',
-      'UX/UI Gaming',
-      'Video Editing',
-      'Graphic Design',
-      'Marketing Design',
-      'UX/UI Apps'
-    ]
+      "Motion Design",
+      "UX/UI Gaming",
+      "Video Editing",
+      "Graphic Design",
+      "Marketing Design",
+      "UX/UI Apps",
+    ],
   },
-  intervalMs: { type: Number, default: 3000 }
-})
+  intervalMs: { type: Number, default: 3000 },
+});
 
-const GAP = 32
-const trackRef = ref(null)
-const itemEls = ref([])
-const stripOffset = ref(0)
-const stripWidth = ref(0)
-const centerPositions = ref([]) // center position of each item in strip (px from left)
-const currentCenterIndex = ref(0) // strip index (0..3n-1) we're centering
-const noTransition = ref(false)
-let timer = null
-let resetTimeoutId = null
-let resetScheduled = false
-const TRANSITION_MS = 550
+const GAP = 32;
+const trackRef = ref(null);
+const itemEls = ref([]);
+const stripOffset = ref(0);
+const stripWidth = ref(0);
+const centerPositions = ref([]); // center position of each item in strip (px from left)
+const currentCenterIndex = ref(0); // strip index (0..3n-1) we're centering
+const noTransition = ref(false);
+let timer = null;
+let resetTimeoutId = null;
+let resetScheduled = false;
+let resizeObserver = null;
+const TRANSITION_MS = 550;
 
-const n = computed(() => props.items.length)
+const n = computed(() => props.items.length);
 
-const stripItems = computed(() => [...props.items, ...props.items, ...props.items])
+const stripItems = computed(() => [
+  ...props.items,
+  ...props.items,
+  ...props.items,
+]);
 
 function setItemEl(el, i) {
-  if (el) itemEls.value[i] = el
+  if (el) itemEls.value[i] = el;
 }
 
 function isCenterIndex(i) {
-  return (i % n.value) === (currentCenterIndex.value % n.value)
+  return i % n.value === currentCenterIndex.value % n.value;
 }
 
 function measureStrip() {
-  const els = itemEls.value.filter(Boolean)
-  if (els.length === 0) return
-  const widths = els.map(el => el.getBoundingClientRect().width)
-  let left = 0
-  const positions = []
+  const els = itemEls.value.filter(Boolean);
+  if (els.length === 0) return;
+  const widths = els.map((el) => el.getBoundingClientRect().width);
+  let left = 0;
+  const positions = [];
   for (let i = 0; i < widths.length; i++) {
-    positions.push(left + widths[i] / 2)
-    left += widths[i] + GAP
+    positions.push(left + widths[i] / 2);
+    left += widths[i] + GAP;
   }
-  stripWidth.value = left - GAP
-  centerPositions.value = positions
+  stripWidth.value = left - GAP;
+  centerPositions.value = positions;
 }
 
 function updateOffsetForCenter() {
-  const positions = centerPositions.value
-  if (positions.length === 0) return
-  const idx = currentCenterIndex.value
+  const positions = centerPositions.value;
+  if (positions.length === 0) return;
+  const idx = currentCenterIndex.value;
   // Track centers the strip; item center = (trackW - stripWidth)/2 + stripOffset + positions[idx]. Set = trackW/2 => stripOffset = stripWidth/2 - positions[idx]
-  stripOffset.value = stripWidth.value / 2 - positions[idx]
+  stripOffset.value = stripWidth.value / 2 - positions[idx];
 }
 
 function advance() {
-  if (resetScheduled || centerPositions.value.length === 0) return
-  const len = centerPositions.value.length
-  const nextIndex = currentCenterIndex.value + 1
-  if (nextIndex >= len) return
+  if (resetScheduled || centerPositions.value.length === 0) return;
+  const len = centerPositions.value.length;
+  const nextIndex = currentCenterIndex.value + 1;
+  if (nextIndex >= len) return;
 
-  currentCenterIndex.value = nextIndex
-  const positions = centerPositions.value
-  stripOffset.value = stripWidth.value / 2 - positions[nextIndex]
+  currentCenterIndex.value = nextIndex;
+  const positions = centerPositions.value;
+  stripOffset.value = stripWidth.value / 2 - positions[nextIndex];
 
   // When we've shown the last item of the second copy (index 2n-1), next would be 2n; reset to n so we loop
   if (nextIndex >= 2 * n.value) {
-    resetScheduled = true
+    resetScheduled = true;
     resetTimeoutId = setTimeout(() => {
-      noTransition.value = true
-      currentCenterIndex.value = n.value
-      stripOffset.value = stripWidth.value / 2 - centerPositions.value[n.value]
+      noTransition.value = true;
+      currentCenterIndex.value = n.value;
+      stripOffset.value = stripWidth.value / 2 - centerPositions.value[n.value];
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          noTransition.value = false
-          resetScheduled = false
-        })
-      })
-    }, TRANSITION_MS)
+          noTransition.value = false;
+          resetScheduled = false;
+        });
+      });
+    }, TRANSITION_MS);
   }
 }
 
+function onResize() {
+  measureStrip();
+  updateOffsetForCenter();
+}
+
 onMounted(() => {
-  if (props.items.length <= 1) return
+  if (props.items.length <= 1) return;
   nextTick(() => {
-    measureStrip()
+    measureStrip();
     if (centerPositions.value.length > 0) {
-      currentCenterIndex.value = n.value
-      updateOffsetForCenter()
+      currentCenterIndex.value = n.value;
+      updateOffsetForCenter();
     }
-  })
-  timer = setInterval(advance, props.intervalMs)
-})
+    const el = trackRef.value;
+    if (el) {
+      resizeObserver = new ResizeObserver(() => onResize());
+      resizeObserver.observe(el);
+    }
+  });
+  timer = setInterval(advance, props.intervalMs);
+});
 
 onUnmounted(() => {
-  if (timer) clearInterval(timer)
-  if (resetTimeoutId) clearTimeout(resetTimeoutId)
-})
+  if (timer) clearInterval(timer);
+  if (resetTimeoutId) clearTimeout(resetTimeoutId);
+  if (resizeObserver && trackRef.value) resizeObserver.disconnect();
+});
 </script>
 
 <style scoped>
@@ -147,7 +163,7 @@ onUnmounted(() => {
     margin: 0;
     color: #fff;
     text-align: center;
-    font-family: 'Insomnia', sans-serif;
+    font-family: "Insomnia", sans-serif;
     font-size: 6.42857rem;
     font-style: normal;
     font-weight: 400;
@@ -199,7 +215,7 @@ onUnmounted(() => {
         flex-shrink: 0;
         white-space: nowrap;
         color: #fff;
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
         font-size: 2.28571rem;
         font-style: normal;
         font-weight: 400;
@@ -210,6 +226,30 @@ onUnmounted(() => {
 
         &.is-center {
           opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .interactive-title {
+    .interactive-title-main {
+      font-size: 3.4375rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    .interactive-title-track {
+      max-width: 25rem;
+
+      .interactive-title-strip {
+        .interactive-title-item {
+          font-size: 1.5rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
         }
       }
     }

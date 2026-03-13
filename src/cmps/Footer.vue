@@ -3,13 +3,29 @@
     <div class="footer-contact">
       <h2 class="footer-title">Contact me:</h2>
       <div class="footer-social">
-        <a href="https://wa.me/972526269621" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <a
+          href="https://wa.me/972526269621"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+        >
           <img :src="whatsappIcon" alt="WhatsApp" />
         </a>
-        <a href="#" class="mail-link" rel="noopener noreferrer" aria-label="Copy email" @click.prevent="handleCopy">
+        <a
+          href="#"
+          class="mail-link"
+          rel="noopener noreferrer"
+          aria-label="Copy email"
+          @click.prevent="handleCopy"
+        >
           <img :src="gmailIcon" alt="Gmail" />
         </a>
-        <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <a
+          href="https://www.linkedin.com/in/rotemsharaby"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
           <img :src="linkedinIcon" alt="LinkedIn" />
         </a>
       </div>
@@ -18,22 +34,29 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject } from "vue";
 
-const email = 'sharabyrotem@gmail.com'
-const showSuccessMsg = inject('showSuccessMsg')
+const email = "sharabyrotem@gmail.com";
+const showSuccessMsg = inject("showSuccessMsg");
 
-const whatsappIcon = new URL('../assets/imgs/social/Whatsapp.svg', import.meta.url).href
-const gmailIcon = new URL('../assets/imgs/social/Gmail.svg', import.meta.url).href
-const linkedinIcon = new URL('../assets/imgs/social/Linkedin.svg', import.meta.url).href
+const whatsappIcon = new URL(
+  "../assets/imgs/social/Whatsapp.svg",
+  import.meta.url,
+).href;
+const gmailIcon = new URL("../assets/imgs/social/Gmail.svg", import.meta.url)
+  .href;
+const linkedinIcon = new URL(
+  "../assets/imgs/social/Linkedin.svg",
+  import.meta.url,
+).href;
 
 async function handleCopy(ev) {
-  ev.preventDefault()
+  ev.preventDefault();
   try {
-    await navigator.clipboard.writeText(email)
-    showSuccessMsg?.('Email has been copied!')
+    await navigator.clipboard.writeText(email);
+    showSuccessMsg?.("Email has been copied!");
   } catch (err) {
-    console.error('Unable to copy', err)
+    console.error("Unable to copy", err);
   }
 }
 </script>
@@ -48,7 +71,7 @@ async function handleCopy(ev) {
   background: var(--prime-bg);
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -57,11 +80,11 @@ async function handleCopy(ev) {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      #C6B8E4 15%,
-      #C6B8E4 35%,
-      #C6B8E4 50%,
-      #C6B8E4 65%,
-      #C6B8E4 85%,
+      #c6b8e4 15%,
+      #c6b8e4 35%,
+      #c6b8e4 50%,
+      #c6b8e4 65%,
+      #c6b8e4 85%,
       transparent 100%
     );
     pointer-events: none;
@@ -96,6 +119,25 @@ async function handleCopy(ev) {
       display: block;
       width: 2rem;
       object-fit: contain;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .app-footer {
+    padding: 1rem;
+    .footer-contact {
+      flex-direction: column;
+    }
+    .footer-title {
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    .footer-social {
+      gap: 1.75rem;
     }
   }
 }

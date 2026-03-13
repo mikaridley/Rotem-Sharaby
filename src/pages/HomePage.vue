@@ -98,12 +98,12 @@ const softwareLogos = [
   width: 100%;
   min-height: 50vh;
   padding: 0;
-  margin-block-end:4rem;
+  margin-block-end: 4rem;
   overflow: hidden;
   background: transparent;
 
   .home-hero-title {
-    margin: 16rem 0 15rem 0;
+    margin: 7rem 0 10rem 0;
   }
 
   .projects {
@@ -196,5 +196,57 @@ const softwareLogos = [
   }
 }
 
-@media (max-width: 1050px) {}
+@media (max-width: 850px) {
+  .home-page {
+    .projects {
+      gap: 1rem;
+      padding-block-end: 4.5rem;
+
+      .projects-title {
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      .projects-buttons {
+        gap: 1.4rem;
+        .home-page-btn {
+          width: 19rem;
+          height: 3.7rem;
+
+          font-size: 1.125rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      .softwares {
+        .software-logo {
+          width: 1.7rem;
+        }
+      }
+    }
+
+    .showreel {
+      .showreel-title {
+        font-size: 2.5rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+
+    .home-page-btn {
+      width: 19rem;
+      height: 3.7rem;
+
+      font-size: 1.125rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}
 </style>

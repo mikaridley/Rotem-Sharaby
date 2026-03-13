@@ -322,6 +322,7 @@ watch(menuOpen, (open) => {
 
 @media (max-width: 1050px) {
   .app-header{
+    padding-inline:1rem;
     .navigation,
     .social-links {
       display: none;
