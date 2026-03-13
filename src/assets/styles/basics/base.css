@@ -13,7 +13,7 @@ body {
   margin: 0;
   background: var(--prime-bg);
   color: var(--light-text);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -75,7 +75,7 @@ button {
   cursor: pointer;
 }
 
-.project-btn {    
+.project-btn {
   display: inline-block;
   padding: 0.87rem 2.29rem;
   font-size: 1.31093rem;
@@ -84,22 +84,41 @@ button {
   border: none;
   border-radius: 100vw;
   background: linear-gradient(180deg, var(--btn-1) 0%, var(--btn-2) 100%);
-  box-shadow: 0 4px 13px 0 #D889EA inset, 0 -4px 13px 0 #4F228D inset;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  box-shadow:
+    0 4px 13px 0 #d889ea inset,
+    0 -4px 13px 0 #4f228d inset;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
 
   cursor: pointer;
   margin-top: 0.25rem;
 
   &:hover {
-    background: linear-gradient(180deg, var(--btn-1-hover) 0%, var(--btn-2-hover) 100%);
-    box-shadow: 0 4px 13px 0 #B064C2 inset, 0 -4px 13px 0 #1B053B inset;
+    background: linear-gradient(
+      180deg,
+      var(--btn-1-hover) 0%,
+      var(--btn-2-hover) 100%
+    );
+    box-shadow:
+      0 4px 13px 0 #b064c2 inset,
+      0 -4px 13px 0 #1b053b inset;
   }
 
   &:active {
-    background: linear-gradient(180deg, #E29EE8 0%, #9B73E5 100%);
-    box-shadow: 0 4px 13px 0 #4F228D inset, 0 -4px 13px 0 #D889EA inset;
+    background: linear-gradient(180deg, #e29ee8 0%, #9b73e5 100%);
+    box-shadow:
+      0 4px 13px 0 #4f228d inset,
+      0 -4px 13px 0 #d889ea inset;
   }
 
+  @media (max-width: 850px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 }
 
 ::-webkit-scrollbar {
