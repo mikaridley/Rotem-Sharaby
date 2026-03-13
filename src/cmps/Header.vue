@@ -246,7 +246,7 @@ watch(menuOpen, (open) => {
 
   .social-links {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
 
     a {
       width: 2rem;
