@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
+import AboutPage from '../pages/AboutPage.vue'
 import UxUiProjectsPage from '../pages/UxUiProjectsPage.vue'
 import MotionProjectsPage from '../pages/MotionProjectsPage.vue'
 import VideoProjectsPage from '../pages/VideoProjectsPage.vue'
@@ -16,7 +17,7 @@ const routes = [
   { path: '/', name: 'home', component: HomePage },
   { path: '/ux-ui', name: 'ux-ui', component: UxUiProjectsPage },
   { path: '/motion', name: 'motion', component: MotionProjectsPage },
-  { path: '/about', name: 'about', component: HomePage, meta: { scrollToAbout: true } },
+  { path: '/about', name: 'about', component: AboutPage },
   { path: '/video-projects/:videoIndex?', name: 'video-projects', component: VideoProjectsPage },
   { path: '/statics', name: 'statics', component: StaticsProjectsPage },
   { path: '/ugc', name: 'ugc', component: UGCProjectsPage },

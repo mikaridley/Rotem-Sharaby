@@ -7,7 +7,7 @@
     <nav class="navigation">
       <router-link to="/ux-ui" class="nav-link" :class="{ active: currentIndex === 1 }">UX / UI Projects</router-link>
       <router-link to="/motion" class="nav-link" :class="{ active: currentIndex === 2 }">Motion Projects</router-link>
-      <router-link to="/about" class="nav-link" :class="{ active: currentIndex === 3 }">About</router-link>
+      <router-link to="/about" class="nav-link" :class="{ active: currentIndex === 3 }">About Me</router-link>
     </nav>
     <div class="social-links">
       <a href="https://wa.me/972526269621" target="_blank"><img :src="whatsappIcon" alt="Whatsapp" /></a>
