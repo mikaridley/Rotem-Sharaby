@@ -2,17 +2,44 @@
   <header class="app-header">
     <div class="logo">
       <router-link to="/" class="logo-name">Rotem Sharaby</router-link>
-      <router-link to="/" class="logo-title">UX / UI Gaming | Motion Design</router-link>
+      <router-link to="/" class="logo-title"
+        >UX / UI Gaming | Motion Design</router-link
+      >
     </div>
     <nav class="navigation">
-      <router-link to="/ux-ui" class="nav-link" :class="{ active: currentIndex === 1 }">UX / UI Projects</router-link>
-      <router-link to="/motion" class="nav-link" :class="{ active: currentIndex === 2 }">Motion Projects</router-link>
-      <router-link to="/about" class="nav-link" :class="{ active: currentIndex === 3 }">About Me</router-link>
+      <router-link
+        to="/ux-ui"
+        class="nav-link"
+        :class="{ active: currentIndex === 1 }"
+        >UX / UI Projects</router-link
+      >
+      <router-link
+        to="/motion"
+        class="nav-link"
+        :class="{ active: currentIndex === 2 }"
+        >Motion Projects</router-link
+      >
+      <router-link
+        to="/about"
+        class="nav-link"
+        :class="{ active: currentIndex === 3 }"
+        >About Me</router-link
+      >
     </nav>
     <div class="social-links">
-      <a href="https://wa.me/972526269621" target="_blank"><img :src="whatsappIcon" alt="Whatsapp" /></a>
-      <a href="#" class="mail-link" aria-label="Copy email" @click.prevent="handleCopy"><img :src="gmailIcon" alt="Gmail" /></a>
-      <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank"><img :src="linkedinIcon" alt="Linkedin" /></a>
+      <a href="https://wa.me/972526269621" target="_blank"
+        ><img :src="whatsappIcon" alt="Whatsapp"
+      /></a>
+      <a
+        href="#"
+        class="mail-link"
+        aria-label="Copy email"
+        @click.prevent="handleCopy"
+        ><img :src="gmailIcon" alt="Gmail"
+      /></a>
+      <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank"
+        ><img :src="linkedinIcon" alt="Linkedin"
+      /></a>
     </div>
 
     <button
@@ -51,15 +78,57 @@
           <span class="menu-close-icon" aria-hidden="true">×</span>
         </button>
         <nav class="menu-drawer-nav">
-          <router-link to="/" class="menu-drawer-link" :class="{ active: currentIndex === 0 }" @click="menuOpen = false">Home</router-link>
-          <router-link to="/ux-ui" class="menu-drawer-link" :class="{ active: currentIndex === 1 }" @click="menuOpen = false">UX / UI Projects</router-link>
-          <router-link to="/motion" class="menu-drawer-link" :class="{ active: currentIndex === 2 }" @click="menuOpen = false">Motion Projects</router-link>
-          <router-link to="/about" class="menu-drawer-link" :class="{ active: currentIndex === 3 }" @click="menuOpen = false">About me</router-link>
+          <router-link
+            to="/"
+            class="menu-drawer-link"
+            :class="{ active: currentIndex === 0 }"
+            @click="menuOpen = false"
+            >Home</router-link
+          >
+          <router-link
+            to="/ux-ui"
+            class="menu-drawer-link"
+            :class="{ active: currentIndex === 1 }"
+            @click="menuOpen = false"
+            >UX / UI Projects</router-link
+          >
+          <router-link
+            to="/motion"
+            class="menu-drawer-link"
+            :class="{ active: currentIndex === 2 }"
+            @click="menuOpen = false"
+            >Motion Projects</router-link
+          >
+          <router-link
+            to="/about"
+            class="menu-drawer-link"
+            :class="{ active: currentIndex === 3 }"
+            @click="menuOpen = false"
+            >About me</router-link
+          >
         </nav>
         <div class="menu-drawer-social">
-          <a href="https://wa.me/972526269621" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><img :src="whatsappIcon" alt="" /></a>
-          <a href="#" class="mail-link" aria-label="Copy email" @click.prevent="handleCopyDrawer"><img :src="gmailIcon" alt="" /></a>
-          <a href="https://www.linkedin.com/in/rotemsharaby" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img :src="linkedinIcon" alt="" /></a>
+          <a
+            href="https://wa.me/972526269621"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            ><img :src="whatsappIcon" alt=""
+          /></a>
+          <a
+            href="#"
+            class="mail-link"
+            aria-label="Copy email"
+            @click.prevent="handleCopyDrawer"
+            ><img :src="gmailIcon" alt=""
+          /></a>
+          <a
+            href="https://www.linkedin.com/in/rotemsharaby"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            ><img :src="linkedinIcon" alt=""
+          /></a>
         </div>
       </aside>
     </Transition>
@@ -67,38 +136,46 @@
 </template>
 
 <script setup>
-import { ref, inject, watch } from 'vue'
+import { ref, inject, watch } from "vue";
 
-defineProps({ currentIndex: { type: Number, default: 0 } })
+defineProps({ currentIndex: { type: Number, default: 0 } });
 
-const email = 'sharabyrotem@gmail.com'
-const showSuccessMsg = inject('showSuccessMsg')
+const email = "sharabyrotem@gmail.com";
+const showSuccessMsg = inject("showSuccessMsg");
 
-const menuOpen = ref(false)
-const burgerIcon = new URL('../assets/icons/burger menu.svg', import.meta.url).href
-const whatsappIcon = new URL('../assets/imgs/social/Whatsapp.svg', import.meta.url).href
-const gmailIcon = new URL('../assets/imgs/social/Gmail.svg', import.meta.url).href
-const linkedinIcon = new URL('../assets/imgs/social/Linkedin.svg', import.meta.url).href
+const menuOpen = ref(false);
+const burgerIcon = new URL("../assets/icons/burger menu.svg", import.meta.url)
+  .href;
+const whatsappIcon = new URL(
+  "../assets/imgs/social/Whatsapp.svg",
+  import.meta.url,
+).href;
+const gmailIcon = new URL("../assets/imgs/social/Gmail.svg", import.meta.url)
+  .href;
+const linkedinIcon = new URL(
+  "../assets/imgs/social/Linkedin.svg",
+  import.meta.url,
+).href;
 
 async function handleCopy(ev) {
-  ev.preventDefault()
+  ev.preventDefault();
   try {
-    await navigator.clipboard.writeText(email)
-    showSuccessMsg?.('Email has been copied!')
+    await navigator.clipboard.writeText(email);
+    showSuccessMsg?.("Email has been copied!");
   } catch (err) {
-    console.error('Unable to copy', err)
+    console.error("Unable to copy", err);
   }
 }
 
 async function handleCopyDrawer(ev) {
-  ev.preventDefault()
-  await handleCopy(ev)
-  menuOpen.value = false
+  ev.preventDefault();
+  await handleCopy(ev);
+  menuOpen.value = false;
 }
 
 watch(menuOpen, (open) => {
-  document.body.style.overflow = open ? 'hidden' : ''
-})
+  document.body.style.overflow = open ? "hidden" : "";
+});
 </script>
 
 <style scoped>
@@ -125,12 +202,16 @@ watch(menuOpen, (open) => {
       line-height: normal;
     }
 
-    .logo-title{
+    .logo-title {
       font-size: 1rem;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
     }
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 
   .navigation {
@@ -155,17 +236,20 @@ watch(menuOpen, (open) => {
       /* Simulate bold with shadow so layout never shifts */
       &.active {
         color: var(--sec-bg);
-        text-shadow: 0 0 0.9px currentColor, 0 0 0.9px currentColor, 0 0 0.9px currentColor;
+        text-shadow:
+          0 0 0.9px currentColor,
+          0 0 0.9px currentColor,
+          0 0 0.9px currentColor;
       }
     }
   }
 
-  .social-links{
+  .social-links {
     display: flex;
-    gap:1rem;
+    gap: 1rem;
 
-    a{
-      width:2rem ;
+    a {
+      width: 2rem;
     }
   }
 
@@ -187,7 +271,7 @@ watch(menuOpen, (open) => {
 
   /* Bottom border: strongest under nav, fades at edges */
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -196,11 +280,11 @@ watch(menuOpen, (open) => {
     background: linear-gradient(
       90deg,
       transparent 0%,
-      #C6B8E4 15%,
-      #C6B8E4 35%,
-      #C6B8E4 50%,
-      #C6B8E4 65%,
-      #C6B8E4 85%,
+      #c6b8e4 15%,
+      #c6b8e4 35%,
+      #c6b8e4 50%,
+      #c6b8e4 65%,
+      #c6b8e4 85%,
       transparent 100%
     );
     pointer-events: none;
@@ -232,8 +316,8 @@ watch(menuOpen, (open) => {
   width: min(85vw, 320px);
   border: 2px solid transparent;
   background:
-    linear-gradient(#0D0D0F, #0D0D0F) padding-box,
-    conic-gradient(from 0deg, #E3A0E8, #643469, #3C2255, #C0A9EC) border-box;
+    linear-gradient(#0d0d0f, #0d0d0f) padding-box,
+    conic-gradient(from 0deg, #e3a0e8, #643469, #3c2255, #c0a9ec) border-box;
   background-origin: border-box;
   background-clip: padding-box, border-box;
   z-index: 601;
@@ -283,11 +367,13 @@ watch(menuOpen, (open) => {
   .menu-drawer-link {
     display: block;
     padding: 1.69rem 1.25rem;
-    margin-block-end:2rem;
+    margin-block-end: 2rem;
     color: var(--light-text);
     text-decoration: none;
     font-size: 1.125rem;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
 
     &:hover {
       color: var(--sec-bg);
@@ -321,8 +407,26 @@ watch(menuOpen, (open) => {
 }
 
 @media (max-width: 1050px) {
-  .app-header{
-    padding-inline:1rem;
+  .app-header {
+    padding-inline: 1rem;
+
+    .logo {
+      width: max-content;
+
+      .logo-name {
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .logo-title {
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
     .navigation,
     .social-links {
       display: none;
@@ -333,5 +437,5 @@ watch(menuOpen, (open) => {
       justify-content: center;
     }
   }
-  }
+}
 </style>

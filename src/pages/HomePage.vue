@@ -199,6 +199,7 @@ const softwareLogos = [
 @media (max-width: 850px) {
   .home-page {
     .projects {
+      padding-inline: 0rem;
       gap: 1rem;
       padding-block-end: 4.5rem;
 

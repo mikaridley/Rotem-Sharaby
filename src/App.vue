@@ -236,8 +236,8 @@ watch(
 
 @media (max-width: 850px) {
   .app {
-    grid-template-columns: minmax(0.5rem, auto) minmax(0, 1500px) minmax(
-        0.5rem,
+    grid-template-columns: minmax(0, auto) minmax(0, 1500px) minmax(
+        0rem,
         auto
       );
   }
