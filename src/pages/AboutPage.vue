@@ -50,6 +50,10 @@ import programsImgMobile from "../assets/imgs/about me/programs mobile.png";
 import experienceImg from "../assets/imgs/about me/experience.png";
 import experienceImgMobile from "../assets/imgs/about me/experience mobile.png";
 import resumeImg from "../assets/imgs/about me/resume.png";
+const cvDownloadUrl = new URL(
+  "../assets/files/Rotem_Sharaby_Designer_Resume_2026.pdf",
+  import.meta.url,
+).href;
 </script>
 
 <style scoped>

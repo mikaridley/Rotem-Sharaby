@@ -10,7 +10,17 @@
         <div class="project-content">
           <span class="project-year">{{ project.year }}</span>
           <h2 class="project-title">{{ project.title }}</h2>
-          <p class="project-description">{{ project.description }}</p>
+          <p class="project-description">
+            {{ isMobile && !isExpanded(project.id) && hasMoreWords(project.description, 7) ? getFirstNWords(project.description, 7) + "..." : project.description }}
+            <button
+              v-if="isMobile && hasMoreWords(project.description, 7)"
+              type="button"
+              class="read-more-btn"
+              @click="toggleExpand(project.id)"
+            >
+              {{ isExpanded(project.id) ? "Read less" : "Read more" }}
+            </button>
+          </p>
           <a
             v-if="project.navigateTo !== undefined"
             href="#"
@@ -25,9 +35,42 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, ref, onMounted, onUnmounted } from 'vue'
 
 const navigateByIndex = inject('navigateByIndex')
+const expandedProjects = ref(new Set())
+const isMobile = ref(false)
+let mq, mqHandler
+
+onMounted(() => {
+  mq = window.matchMedia('(max-width: 850px)')
+  isMobile.value = mq.matches
+  mqHandler = (e) => (isMobile.value = e.matches)
+  mq.addEventListener('change', mqHandler)
+})
+onUnmounted(() => {
+  mq?.removeEventListener('change', mqHandler)
+})
+
+function getFirstNWords(text, n) {
+  const words = String(text).trim().split(/\s+/)
+  return words.slice(0, n).join(' ')
+}
+
+function hasMoreWords(text, n) {
+  return String(text).trim().split(/\s+/).length > n
+}
+
+function isExpanded(projectId) {
+  return expandedProjects.value.has(projectId)
+}
+
+function toggleExpand(projectId) {
+  const next = new Set(expandedProjects.value)
+  if (next.has(projectId)) next.delete(projectId)
+  else next.add(projectId)
+  expandedProjects.value = next
+}
 
 function goToProject(index) {
   navigateByIndex(index)
@@ -116,6 +159,20 @@ const projects = [
           line-height: 2rem;
           max-width: 40rem;
           margin-bottom: 1.57rem;
+
+          .read-more-btn {
+            margin-left: 0.25rem;
+            padding: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: #c760cf;
+            font-family: Poppins, sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+          }
         }
       }
     }
@@ -176,6 +233,20 @@ const projects = [
             font-weight: 400;
             line-height: 128.5%;
             margin-bottom: 0rem;
+
+            .read-more-btn {
+              margin-left: 0.25rem;
+              padding: 0;
+              border: none;
+              background: none;
+              cursor: pointer;
+              color: #c760cf;
+              font-family: Poppins, sans-serif;
+              font-size: 1rem;
+              font-style: normal;
+              font-weight: 500;
+              line-height: normal;
+            }
           }
         }
       }
