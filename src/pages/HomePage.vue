@@ -7,8 +7,18 @@
     <div class="projects">
       <h2 class="projects-title">Choose your interest:</h2>
       <div class="projects-buttons">
-        <a href="#" class="project-btn home-page-btn" @click.prevent="navigateByIndex(1)">UX / UI Projects</a>
-        <a href="#" class="project-btn home-page-btn" @click.prevent="navigateByIndex(2)">Motion Projects</a>
+        <a
+          href="#"
+          class="project-btn home-page-btn"
+          @click.prevent="navigateByIndex(1)"
+          >UX / UI Projects</a
+        >
+        <a
+          href="#"
+          class="project-btn home-page-btn"
+          @click.prevent="navigateByIndex(2)"
+          >Motion Projects</a
+        >
       </div>
       <div class="softwares">
         <img
@@ -34,53 +44,52 @@
       />
     </div>
 
-    <div class="about-me" id="about-me">
-      <h1 class="about-me-title" id="about-me-title">About me</h1>
-      <div class="about-me-card">
-        <h2 class="about-me-heading">My Name is <span class="about-me-name">Rotem Sharaby</span></h2>
-        <p class="about-me-text">I'm a multidisciplinary designer specializing in motion graphics, UX/UI for gaming, and digital product design.</p>
-        <p class="about-me-text">From a young age, gaming and design have fueled my creativity, leading me to craft immersive experiences that blend strategy, storytelling, and visual innovation.</p>
-        <p class="about-me-text">My expertise spans game UI/UX, branding, and motion design, with a strong focus on user engagement and intuitive interaction. Whether designing for games, apps, or digital platforms, I strive to create visually striking and seamless experiences.</p>
-        <p class="about-me-text">Passionate about pushing creative boundaries, I love collaborating with teams to bring unique ideas to life.</p>
-        <p class="about-me-text">If you'd like to connect, feel free to reach out.</p>
-      </div>
-      <a :href="cvDownloadUrl" class="project-btn home-page-btn" target="_blank" rel="noopener noreferrer">Download CV</a>
-    </div>
+    <a
+      :href="cvDownloadUrl"
+      class="project-btn home-page-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Download CV</a
+    >
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from 'vue'
-import InteractiveTitle from '../cmps/InteractiveTitle.vue'
+import { ref, onMounted, inject } from "vue";
+import InteractiveTitle from "../cmps/InteractiveTitle.vue";
 
-const navigateByIndex = inject('navigateByIndex')
+const navigateByIndex = inject("navigateByIndex");
 
-const showreelVideo = ref(null)
-const homeReelSrc = new URL('../assets/videos/Home Reel.mp4', import.meta.url).href
-const cvDownloadUrl = new URL('../assets/files/Rotem_Sharaby_Designer_Resume_2026.pdf', import.meta.url).href
+const showreelVideo = ref(null);
+const homeReelSrc = new URL("../assets/videos/Home Reel.mp4", import.meta.url)
+  .href;
+const cvDownloadUrl = new URL(
+  "../assets/files/Rotem_Sharaby_Designer_Resume_2026.pdf",
+  import.meta.url,
+).href;
 
 function setStartVolume() {
-  if (showreelVideo.value) showreelVideo.value.volume = 0.1
+  if (showreelVideo.value) showreelVideo.value.volume = 0.1;
 }
 
 onMounted(() => {
-  if (showreelVideo.value) showreelVideo.value.volume = 0.1
-})
+  if (showreelVideo.value) showreelVideo.value.volume = 0.1;
+});
 
 // Software logos from src/assets/imgs/sotfware – adjust filenames to match your folder
 const softwareLogos = [
-  { name: 'Figma', file: 'figma.png' },
-  { name: 'After Effects', file: 'after-effects.png' },
-  { name: 'Photoshop', file: 'photoshop.png' },
-  { name: 'Illustrator', file: 'illustrator.png' },
-  { name: 'Premiere Pro', file: 'premiere.png' },
-  { name: 'XD', file: 'xd.png' },
-  { name: 'InDesign', file: 'indesign.png' },
-  { name: 'Blender', file: 'blender.png' }
-].map(item => ({
+  { name: "Figma", file: "figma.png" },
+  { name: "After Effects", file: "after-effects.png" },
+  { name: "Photoshop", file: "photoshop.png" },
+  { name: "Illustrator", file: "illustrator.png" },
+  { name: "Premiere Pro", file: "premiere.png" },
+  { name: "XD", file: "xd.png" },
+  { name: "InDesign", file: "indesign.png" },
+  { name: "Blender", file: "blender.png" },
+].map((item) => ({
   ...item,
-  src: new URL(`../assets/imgs/sotfware/${item.file}`, import.meta.url).href
-}))
+  src: new URL(`../assets/imgs/sotfware/${item.file}`, import.meta.url).href,
+}));
 </script>
 
 <style scoped>
@@ -89,6 +98,7 @@ const softwareLogos = [
   width: 100%;
   min-height: 50vh;
   padding: 0;
+  margin-block-end:4rem;
   overflow: hidden;
   background: transparent;
 
@@ -103,6 +113,7 @@ const softwareLogos = [
     justify-content: center;
     gap: 2rem;
     padding: 2rem;
+    padding-block-end: 5.25rem;
 
     .projects-title {
       font-size: 1.71429rem;
@@ -110,7 +121,7 @@ const softwareLogos = [
       font-weight: 400;
       line-height: normal;
       text-align: center;
-  }
+    }
 
     .projects-buttons {
       display: flex;
@@ -118,8 +129,7 @@ const softwareLogos = [
       justify-content: center;
       gap: 2rem;
 
-      
-      .home-page-btn{
+      .home-page-btn {
         display: grid;
         place-items: center;
         width: 26.8rem;
@@ -130,7 +140,6 @@ const softwareLogos = [
         font-weight: 400;
         line-height: normal;
       }
-
     }
 
     .softwares {
@@ -139,8 +148,7 @@ const softwareLogos = [
       justify-content: center;
       align-items: center;
       gap: 1rem;
-      margin-top:1.5rem;
-      margin-bottom:6rem;
+      margin-top: 1.5rem;
 
       .software-logo {
         width: 3rem;
@@ -150,92 +158,41 @@ const softwareLogos = [
     }
   }
 
-  .showreel{
-  display: grid;
-  place-items: center;
-  gap: 1.5rem;
-  padding: 2rem;
+  .showreel {
+    display: grid;
+    place-items: center;
+    gap: 1.5rem;
+    padding-block-end: 2rem;
 
-    .showreel-title{
+    .showreel-title {
       text-transform: uppercase;
       font-size: 3.42857rem;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-      font-family: 'Insomnia', sans-serif;
+      font-family: "Insomnia", sans-serif;
     }
 
     .showreel-video {
       width: 100%;
       max-width: 92rem;
-      max-height:52rem;
+      max-height: 52rem;
       border-radius: 12px;
-      margin-bottom: 10rem;
     }
   }
 
-  .about-me {
+  .home-page-btn {
+    justify-self: center;
+    align-items: start;
     display: grid;
     place-items: center;
-    gap: 2rem;
-    margin-bottom: 7.2rem;
+    width: 26.8rem;
+    height: 4.8rem;
 
-    .about-me-title {
-      text-transform: uppercase;
-      font-size: 3.42857rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      font-family: 'Insomnia', sans-serif;
-      margin-bottom:2.3rem;
-    }
-
-    .about-me-card {
-      max-width: 64rem;
-      padding-block: 3rem;
-      padding-inline: 4.7rem;
-      background: var(--prime-bg);
-      border-radius: 16px;
-      border: 1px solid var(--prime-accent-300);
-      box-shadow: 0 0 20px rgba(106, 52, 130, 0.4);
-    }
-
-    .about-me-heading {
-      font-size: 2.28571rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1.92857rem;
-      margin-bottom:2rem;
-    }
-
-    .about-me-name {
-      color: #B589EA;
-      font-weight: 600;
-    }
-
-    .about-me-text {
-      font-family: Poppins;
-      font-size: 1.28571rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1.92857rem;
-    }
-
-    .home-page-btn{
-        display: grid;
-        place-items: center;
-        width: 26.8rem;
-        height: 4.8rem;
-        margin-top:3.4rem;
-
-        font-size: 1.71429rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-
+    font-size: 1.71429rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
-
-
 }
 </style>
