@@ -2,7 +2,11 @@
   <section class="statics-projects-page">
     <h1 class="page-title">Static Projects</h1>
 
-    <section v-for="section in sections" :key="section.id" class="statics-section">
+    <section
+      v-for="section in sections"
+      :key="section.id"
+      class="statics-section"
+    >
       <h2 class="section-heading">{{ section.title }}</h2>
       <div class="statics-grid">
         <template v-if="section.id === 'particula' && particulaImages.length">
@@ -16,7 +20,9 @@
             <img :src="src" :alt="`Particula ${i + 1}`" class="statics-img" />
           </button>
         </template>
-        <template v-else-if="section.id === 'pandazzz' && pandazzzImages.length">
+        <template
+          v-else-if="section.id === 'pandazzz' && pandazzzImages.length"
+        >
           <button
             v-for="(src, i) in pandazzzImages"
             :key="i"
@@ -39,11 +45,7 @@
           </button>
         </template>
         <template v-else>
-          <div
-            v-for="i in 8"
-            :key="i"
-            class="statics-placeholder"
-          >
+          <div v-for="i in 8" :key="i" class="statics-placeholder">
             <!-- Image will go here later -->
           </div>
         </template>
@@ -63,7 +65,14 @@
               :alt="activeModalImage.alt"
               class="statics-modal-img"
             />
-            <button type="button" class="statics-modal-close" aria-label="Close" @click="closeImage">×</button>
+            <button
+              type="button"
+              class="statics-modal-close"
+              aria-label="Close"
+              @click="closeImage"
+            >
+              ×
+            </button>
           </div>
         </div>
       </Transition>
@@ -72,44 +81,59 @@
 </template>
 
 <script setup>
-import { ref, onUnmounted } from 'vue'
+import { ref, onUnmounted } from "vue";
 
-const particulaModules = import.meta.glob('../assets/imgs/particula/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
-const particulaImages = Object.keys(particulaModules).sort().map(path => particulaModules[path]?.default ?? particulaModules[path])
+const particulaModules = import.meta.glob(
+  "../assets/imgs/particula/*.{png,jpg,jpeg,webp,gif}",
+  { eager: true, query: "?url", import: "default" },
+);
+const particulaImages = Object.keys(particulaModules)
+  .sort()
+  .map((path) => particulaModules[path]?.default ?? particulaModules[path]);
 
-const pandazzzModules = import.meta.glob('../assets/imgs/pandazzz/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
-const pandazzzImages = Object.keys(pandazzzModules).sort().map(path => pandazzzModules[path]?.default ?? pandazzzModules[path])
+const pandazzzModules = import.meta.glob(
+  "../assets/imgs/pandazzz/*.{png,jpg,jpeg,webp,gif}",
+  { eager: true, query: "?url", import: "default" },
+);
+const pandazzzImages = Object.keys(pandazzzModules)
+  .sort()
+  .map((path) => pandazzzModules[path]?.default ?? pandazzzModules[path]);
 
-const othersModules = import.meta.glob('../assets/imgs/others/*.{png,jpg,jpeg,webp,gif}', { eager: true, query: '?url', import: 'default' })
-const othersImages = Object.keys(othersModules).sort().map(path => othersModules[path]?.default ?? othersModules[path])
+const othersModules = import.meta.glob(
+  "../assets/imgs/others/*.{png,jpg,jpeg,webp,gif}",
+  { eager: true, query: "?url", import: "default" },
+);
+const othersImages = Object.keys(othersModules)
+  .sort()
+  .map((path) => othersModules[path]?.default ?? othersModules[path]);
 
-const activeModalImage = ref(null)
+const activeModalImage = ref(null);
 
 function openImage(src, alt) {
-  activeModalImage.value = { src, alt }
+  activeModalImage.value = { src, alt };
 }
 
 function closeImage() {
-  activeModalImage.value = null
+  activeModalImage.value = null;
 }
 
 function onKeydown(e) {
-  if (e.key === 'Escape') closeImage()
+  if (e.key === "Escape") closeImage();
 }
 
 onUnmounted(() => {
-  document.removeEventListener('keydown', onKeydown)
-})
+  document.removeEventListener("keydown", onKeydown);
+});
 
-if (typeof document !== 'undefined') {
-  document.addEventListener('keydown', onKeydown)
+if (typeof document !== "undefined") {
+  document.addEventListener("keydown", onKeydown);
 }
 
 const sections = [
-  { id: 'particula', title: 'Particula' },
-  { id: 'pandazzz', title: 'PandaZZZ' },
-  { id: 'others', title: 'Others' }
-]
+  { id: "particula", title: "Particula" },
+  { id: "pandazzz", title: "PandaZZZ" },
+  { id: "others", title: "Others" },
+];
 </script>
 
 <style scoped>
@@ -121,7 +145,7 @@ const sections = [
 
   .page-title {
     margin: 0 0 4rem 0;
-    font-family: 'Insomnia', sans-serif;
+    font-family: "Insomnia", sans-serif;
     font-size: 3rem;
     font-style: normal;
     font-weight: 400;
@@ -142,7 +166,7 @@ const sections = [
 
     .section-heading {
       margin: 0 0 1.5rem 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--light-text);
@@ -155,7 +179,7 @@ const sections = [
       gap: 1.5rem;
 
       @media (max-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -178,21 +202,47 @@ const sections = [
       &:hover {
         transform: scale(1.05);
       }
-    }
 
-    .statics-placeholder:hover {
-      transform: scale(1.05);
+      .statics-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
     }
 
     .statics-placeholder {
       background: #e0e0e0;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .statics-projects-page {
+    padding-inline: 0.5rem;
+    .page-title {
+      font-size: 2.5rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     }
 
-    .statics-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .statics-section {
+      .section-heading {
+        font-size: 1.125rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 2rem;
+        margin-bottom:0.25rem;
+      }
+
+      .statics-grid {
+        gap: 0.5rem;
+      }
     }
   }
 }
@@ -208,49 +258,62 @@ const sections = [
   align-items: center;
   justify-content: center;
   padding: 2rem;
+
+  &.modal-enter-active,
+  &.modal-leave-active {
+    transition: opacity 0.2s ease;
+  }
+  &.modal-enter-from,
+  &.modal-leave-to {
+    opacity: 0;
+  }
+
+  .statics-modal-content {
+    position: relative;
+    max-width: 85vw;
+    max-height: 85vh;
+  }
+
+  .statics-modal-img {
+    max-width: 35vw;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+    background: #000;
+  }
+
+  .statics-modal-close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
 
-.statics-modal-content {
-  position: relative;
-  max-width: 85vw;
-  max-height: 85vh;
-}
+@media (max-width: 850px) {
+  .statics-modal-overlay {
+  .statics-modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
 
-.statics-modal-close {
-  position: absolute;
-  top: -2.5rem;
-  right: 0;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  border: none;
-  background: transparent;
-  color: #fff;
-  font-size: 2rem;
-  line-height: 1;
-  cursor: pointer;
+  .statics-modal-img {
+    max-width: 90vw;
+  }
 }
-
-.statics-modal-close:hover {
-  opacity: 0.8;
-}
-
-.statics-modal-img {
-  max-width: 35vw;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  border-radius: 8px;
-  background: #000;
-}
-
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.2s ease;
-}
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
 }
 </style>
